@@ -26,9 +26,9 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .mobile-menu a{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);text-decoration:none;cursor:pointer;padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .mobile-menu a::after{content:'→';font-family:'Inter',sans-serif;font-size:16px;color:var(--accent)}
 .mobile-menu a:hover{background:rgba(123,94,167,0.04)}
-@media(max-width:600px){
-  .nav-links{display:none}
-  .hamburger{display:flex}
+@media(max-width:768px){
+  .nav-links{display:none!important}
+  .hamburger{display:flex!important}
   .landing-hero{padding:60px 20px 40px;min-height:80vh}
   .landing-hero h1{font-size:clamp(42px,12vw,72px)}
   .landing-sub{font-size:17px}
