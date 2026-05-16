@@ -872,8 +872,8 @@ const posts=[
 <h2>What We Learned</h2>
 <p>In the end, we found locations that worked — not perfectly, but well enough to serve the story. The process taught us that location selection for independent film is an exercise in creative compromise, and that the ability to see the potential in an imperfect space is one of the most valuable skills a filmmaker can develop.</p>
 <p>Through this experience, we realised that for independent filmmakers, the ability to adapt and make compromises is essential in balancing artistic vision with real-world constraints. Every location we visited taught us something — about what the film needed, and about what we were willing to fight for versus let go. We're still developing that skill. Heritage is the training ground.</p>`},
-  {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"Shooting day",body:`<p>Coming soon.</p>`},
-  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"MicroCrew team",body:`<p>Coming soon.</p>`}
+  {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"images/post1-hero.jpg",body:`<p>Coming soon.</p>`},
+  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"images/post1-hero.jpg",body:`<p>Coming soon.</p>`}
 ];
 
 const listEl=document.getElementById('post-list');
@@ -913,7 +913,7 @@ function showPost(n){
       <p class="subtitle">${p.subtitle}</p>
       <div class="post-header-meta">By ${p.author}${p.role?' · '+p.role:''} · MicroCrew Productions · Kuala Lumpur · ${readTime(p.body)} min read</div>
     </div>
-    <div class="post-img-hero"><img src="${p.img}" style="width:100%;height:420px;object-fit:cover;border-radius:4px;display:block"/></div>
+    <div class="post-img-hero">${p.img.startsWith('images/') ? `<img src="${p.img}" style="width:100%;height:420px;object-fit:cover;border-radius:4px;display:block"/>` : `<div class="img-placeholder" style="height:420px">${p.img}</div>`}</div>
     <div class="post-body">${p.body}
       ${shareButtons(p.title)}
       ${authorBio(p.author,p.role)}
