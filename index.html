@@ -5,269 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MicroCrew Productions</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;400;500;600&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box}
-  :root{--cream:#f0ece4;--dark:#1a1008;--brown:#3d2010;--accent:#7b5ea7;--mid:#6b5040;--border:#c8bfb0}
-  body{background:var(--cream);color:var(--dark);font-family:'EB Garamond',serif;min-height:100vh}
-
-  /* NAV */
-  nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
-  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
-  .nav-logo-img{width:36px;height:36px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
-  .nav-brand{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
-  .nav-links{display:flex;gap:24px;align-items:center}
-  .nav-links a{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;cursor:pointer;transition:color .2s}
-  .nav-links a:hover{color:var(--brown)}
-  .nav-cart{position:relative;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);background:none;border:none;padding:0}
-  .cart-count{background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
-
-  .page{display:none;animation:fadeIn .4s ease}
-  .page.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-  /* LANDING HOME */
-  .landing-hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden}
-  .landing-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,94,167,0.06) 0%,transparent 70%);pointer-events:none}
-  .landing-logo{width:120px;height:120px;border-radius:16px;background:#111;margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
-  .landing-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--mid);margin-bottom:20px}
-  .landing-hero h1{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,100px);font-weight:900;color:var(--brown);line-height:0.95;margin-bottom:32px;text-transform:uppercase}
-  .landing-sub{font-size:20px;color:var(--mid);max-width:600px;margin:0 auto 48px;font-style:italic;line-height:1.7}
-  .landing-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-  .btn-primary{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;background:var(--brown);color:var(--cream);border:none;cursor:pointer;transition:all .2s;border-radius:2px}
-  .btn-primary:hover{background:var(--dark)}
-  .btn-secondary{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;background:transparent;color:var(--brown);border:1px solid var(--brown);cursor:pointer;transition:all .2s;border-radius:2px}
-  .btn-secondary:hover{background:var(--brown);color:var(--cream)}
-  .landing-scroll{margin-top:80px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--border)}
-  .landing-features{max-width:900px;margin:0 auto;padding:80px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;border-top:1px solid var(--border)}
-  .feature-item{text-align:center}
-  .feature-num{font-family:'Inter',sans-serif;font-size:32px;font-weight:600;color:var(--accent);margin-bottom:8px}
-  .feature-label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid)}
-
-  /* JOURNAL */
-  .hero{padding:80px 40px 60px;max-width:900px;margin:0 auto;text-align:center}
-  .hero-logo{width:100px;height:100px;border-radius:12px;background:#111;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
-  .hero-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
-  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,8vw,82px);font-weight:900;color:var(--brown);line-height:1;margin-bottom:24px;text-transform:uppercase}
-  .hero-sub{font-size:19px;color:var(--mid);max-width:580px;margin:0 auto 16px;font-style:italic;line-height:1.7}
-  .hero-manifesto{font-size:15px;color:var(--mid);max-width:600px;margin:0 auto 48px;line-height:1.8;font-family:'Inter',sans-serif;font-weight:300}
-  .hero-divider{width:60px;height:2px;background:var(--brown);margin:0 auto 60px}
-  .posts-section{max-width:900px;margin:0 auto;padding:0 40px 80px}
-  .section-label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);border-top:1px solid var(--border);padding-top:16px;margin-bottom:40px;display:flex;justify-content:space-between}
-  .post-item{display:flex;align-items:flex-start;gap:24px;padding:28px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
-  .post-item:hover .post-title{color:var(--accent)}
-  .post-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--border);width:40px;flex-shrink:0;padding-top:4px}
-  .post-info{flex:1}
-  .post-tag{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-  .post-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown);margin-bottom:8px;transition:color .2s}
-  .post-excerpt{font-size:15px;color:var(--mid);line-height:1.6}
-  .post-meta{font-family:'Inter',sans-serif;font-size:11px;color:var(--border);margin-top:10px;letter-spacing:1px}
-
-  /* FILMS */
-  .page-hero{padding:60px 40px 40px;max-width:900px;margin:0 auto}
-  .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:900;color:var(--brown);text-transform:uppercase;line-height:1;margin-bottom:16px}
-  .page-hero p{font-size:18px;color:var(--mid);font-style:italic;max-width:600px;line-height:1.6}
-  .films-list{max-width:900px;margin:0 auto;padding:20px 40px 80px}
-  .film-card{padding:48px 0;border-bottom:1px solid var(--border);cursor:pointer}
-  .film-card:hover .film-title{color:var(--accent)}
-  .film-card-inner{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start}
-  .film-poster{width:280px;height:380px;background:linear-gradient(145deg,#2a1a0a,#4a2a1a);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
-  .film-poster-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
-  .film-poster-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:4px;text-transform:uppercase}
-  .film-poster-sub{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
-  .film-status{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border:1px solid var(--accent);color:var(--accent);border-radius:2px;margin-bottom:16px}
-  .film-title{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--brown);line-height:1;margin-bottom:8px;text-transform:uppercase;transition:color .2s}
-  .film-logline{font-size:17px;font-style:italic;color:var(--mid);line-height:1.7;margin-bottom:24px}
-  .film-meta-row{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
-  .film-meta-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--border)}
-  .film-meta-value{font-family:'Inter',sans-serif;font-size:13px;color:var(--brown);font-weight:500}
-  .film-desc{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:24px}
-  .view-film-btn{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);cursor:pointer}
-
-  /* FILM DETAIL */
-  .film-page-header{max-width:900px;margin:0 auto;padding:60px 40px 0}
-  .film-synopsis{max-width:700px;margin:0 auto;padding:0 40px 60px}
-  .film-synopsis h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--brown);margin-bottom:20px}
-  .film-synopsis p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:24px}
-  .crew-section{max-width:900px;margin:0 auto;padding:0 40px 80px}
-  .crew-section-title{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);border-top:1px solid var(--border);padding-top:16px;margin-bottom:40px}
-  .crew-member{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);align-items:start}
-  .crew-member:last-child{border-bottom:none}
-  .crew-photo{width:160px;height:200px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);flex-shrink:0}
-  .crew-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);margin-bottom:4px}
-  .crew-role{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-  .crew-bio{font-size:15px;color:var(--mid);line-height:1.8}
-  .crew-projects{margin-top:12px}
-  .crew-projects-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--border);margin-bottom:6px}
-  .crew-project-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;border:1px solid var(--border);color:var(--mid);border-radius:2px}
-
-  /* MERCH STORE */
-  .store-hero{padding:60px 40px 40px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
-  .store-hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:900;color:var(--brown);text-transform:uppercase;line-height:1}
-  .store-hero p{font-size:17px;color:var(--mid);font-style:italic;max-width:400px;line-height:1.6}
-  .currency-selector{display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
-  .currency-selector select{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;padding:8px 12px;border:1px solid var(--border);background:var(--cream);color:var(--brown);cursor:pointer;border-radius:2px}
-  .store-filters{max-width:1100px;margin:0 auto;padding:0 40px 32px;display:flex;gap:12px;flex-wrap:wrap}
-  .filter-btn{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:8px 20px;border:1px solid var(--border);background:transparent;color:var(--mid);cursor:pointer;border-radius:2px;transition:all .2s}
-  .filter-btn.active,.filter-btn:hover{background:var(--brown);color:var(--cream);border-color:var(--brown)}
-  .products-grid{max-width:1100px;margin:0 auto;padding:0 40px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-  .product-card{cursor:pointer;transition:all .2s}
-  .product-card:hover .product-img{transform:scale(1.02)}
-  .product-img-wrap{overflow:hidden;border-radius:4px;margin-bottom:16px;aspect-ratio:3/4;background:linear-gradient(135deg,#d4c9b8,#b8a99a);display:flex;align-items:center;justify-content:center;position:relative}
-  .product-img-wrap .product-placeholder{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-align:center;padding:20px}
-  .product-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;position:absolute;inset:0}
-  .product-badge{position:absolute;top:12px;left:12px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;background:var(--accent);color:#fff;border-radius:2px}
-  .product-name{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);margin-bottom:4px}
-  .product-type{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
-  .product-price{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--brown)}
-  .product-colors{display:flex;gap:6px;margin-top:8px}
-  .color-dot{width:14px;height:14px;border-radius:50%;border:1px solid var(--border)}
-
-  /* PRODUCT DETAIL */
-  .product-detail{max-width:1000px;margin:0 auto;padding:60px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-  .product-detail-img{aspect-ratio:3/4;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;display:flex;align-items:center;justify-content:center}
-  .product-detail-img span{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
-  .product-detail-info{}
-  .back-btn{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);cursor:pointer;margin-bottom:24px;display:inline-block}
-  .back-btn:hover{color:var(--brown)}
-  .detail-type{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-  .detail-name{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;color:var(--brown);line-height:1;margin-bottom:12px}
-  .detail-price{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;color:var(--brown);margin-bottom:24px}
-  .detail-desc{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:32px}
-  .option-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:10px}
-  .color-options{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-  .color-option{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .2s;position:relative}
-  .color-option.selected{border-color:var(--brown)}
-  .color-option span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1px;color:var(--mid);white-space:nowrap}
-  .size-options{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
-  .size-btn{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;padding:10px 16px;border:1px solid var(--border);background:transparent;color:var(--mid);cursor:pointer;border-radius:2px;transition:all .2s}
-  .size-btn.selected,.size-btn:hover{background:var(--brown);color:var(--cream);border-color:var(--brown)}
-  .qty-row{display:flex;align-items:center;gap:16px;margin-bottom:24px}
-  .qty-btn{width:36px;height:36px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:18px;color:var(--brown);border-radius:2px;transition:all .2s}
-  .qty-btn:hover{background:var(--brown);color:var(--cream)}
-  .qty-num{font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:var(--brown);min-width:30px;text-align:center}
-  .add-to-cart-btn{width:100%;padding:16px;background:var(--brown);color:var(--cream);border:none;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .2s;margin-bottom:12px}
-  .add-to-cart-btn:hover{background:var(--dark)}
-  .shipping-note{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;color:var(--mid);text-align:center}
-
-  /* CART SIDEBAR */
-  .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none}
-  .cart-overlay.open{display:block}
-  .cart-sidebar{position:fixed;top:0;right:-420px;width:420px;height:100vh;background:var(--cream);z-index:201;transition:right .3s ease;display:flex;flex-direction:column;border-left:1px solid var(--border)}
-  .cart-sidebar.open{right:0}
-  .cart-header{padding:24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-  .cart-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown)}
-  .cart-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--mid)}
-  .cart-items{flex:1;overflow-y:auto;padding:24px}
-  .cart-empty{text-align:center;padding:60px 20px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--border)}
-  .cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
-  .cart-item-img{width:70px;height:90px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'Inter',sans-serif;letter-spacing:1px;color:var(--mid);text-align:center}
-  .cart-item-info{flex:1}
-  .cart-item-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--brown);margin-bottom:4px}
-  .cart-item-details{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;color:var(--mid);margin-bottom:8px}
-  .cart-item-price{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--brown)}
-  .cart-item-remove{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--border);cursor:pointer;background:none;border:none;margin-top:4px}
-  .cart-item-remove:hover{color:var(--brown)}
-  .cart-footer{padding:24px;border-top:1px solid var(--border)}
-  .cart-subtotal{display:flex;justify-content:space-between;margin-bottom:8px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
-  .cart-total{display:flex;justify-content:space-between;margin-bottom:24px;font-family:'Playfair Display',serif;font-size:22px;color:var(--brown)}
-  .checkout-btn{width:100%;padding:16px;background:var(--brown);color:var(--cream);border:none;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .2s}
-  .checkout-btn:hover{background:var(--dark)}
-  .checkout-note{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;color:var(--border);text-align:center;margin-top:12px}
-
-  /* CHECKOUT PAGE */
-  .checkout-wrap{max-width:900px;margin:0 auto;padding:60px 40px 80px;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:start}
-  .checkout-form h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--brown);margin-bottom:32px}
-  .form-section{margin-bottom:32px}
-  .form-section-title{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-  .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-  .form-group label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
-  .form-group input,.form-group select{padding:12px;border:1px solid var(--border);background:var(--cream);font-family:'EB Garamond',serif;font-size:16px;color:var(--dark);border-radius:2px;outline:none;transition:border .2s}
-  .form-group input:focus,.form-group select:focus{border-color:var(--accent)}
-  .card-row{display:grid;grid-template-columns:1fr 100px 100px;gap:16px}
-  .order-summary{background:#fff;border:1px solid var(--border);border-radius:4px;padding:24px;position:sticky;top:80px}
-  .order-summary h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown);margin-bottom:20px}
-  .order-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px;color:var(--mid)}
-  .order-item:last-of-type{border-bottom:none}
-  .order-divider{border:none;border-top:1px solid var(--border);margin:16px 0}
-  .order-total-row{display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
-  .order-grand{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-size:22px;color:var(--brown);margin-bottom:24px}
-  .place-order-btn{width:100%;padding:16px;background:var(--brown);color:var(--cream);border:none;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .2s}
-  .place-order-btn:hover{background:var(--dark)}
-  .secure-note{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;color:var(--border);text-align:center;margin-top:12px}
-
-  /* TEAM */
-  .team-grid{max-width:900px;margin:0 auto;padding:20px 40px 80px;display:flex;flex-direction:column}
-  .member{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:48px 0;border-bottom:1px solid var(--border)}
-  .member:last-child{border-bottom:none}
-  .member-img{width:200px;height:260px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);flex-shrink:0}
-  .member-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--border);margin-bottom:12px}
-  .member-name{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--brown);margin-bottom:4px}
-  .member-role{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-  .member-bio{font-size:16px;color:var(--mid);line-height:1.8}
-
-  /* POST */
-  .post-header{max-width:700px;margin:0 auto;padding:60px 40px 40px;text-align:center}
-  .post-header .post-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-  .post-header .post-num-large{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--border);margin-bottom:8px}
-  .post-header h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--brown);line-height:1.1;text-transform:uppercase;margin-bottom:24px}
-  .post-header .subtitle{font-size:19px;font-style:italic;color:var(--mid);line-height:1.6;margin-bottom:32px}
-  .post-header-meta{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--border);padding-bottom:32px;border-bottom:1px solid var(--border)}
-  .post-img-hero{max-width:900px;margin:0 auto 48px;padding:0 40px}
-  .img-placeholder{width:100%;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
-  .post-img-hero .img-placeholder{height:420px}
-  .post-body{max-width:700px;margin:0 auto;padding:0 40px 80px}
-  .post-body p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:28px}
-  .post-body h2{font-family:'Playfair Display',serif;font-size:30px;color:var(--brown);margin:48px 0 20px}
-  .pull-quote{font-size:23px;font-style:italic;color:var(--brown);border-left:3px solid var(--accent);padding-left:24px;margin:40px 0;line-height:1.5}
-  .img-block{margin:40px 0}
-  .img-block .img-placeholder{height:300px}
-  .img-caption{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;color:var(--border);margin-top:8px;text-align:center}
-  .post-nav{display:flex;justify-content:space-between;padding:32px 0;border-top:1px solid var(--border);margin-top:40px}
-  .post-nav a{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);cursor:pointer}
-  .post-nav a:hover{color:var(--brown)}
-
-  /* ABOUT */
-  .about-wrap{max-width:700px;margin:0 auto;padding:60px 40px 80px}
-  .about-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,68px);font-weight:900;color:var(--brown);text-transform:uppercase;line-height:1;margin-bottom:32px}
-  .about-wrap p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:28px}
-  .big-quote{font-size:22px;font-style:italic;color:var(--brown);border-left:3px solid var(--accent);padding-left:24px;margin:40px 0;line-height:1.5}
-
-  /* TOAST */
-  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:var(--cream);padding:14px 28px;border-radius:3px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;z-index:300;transition:transform .3s ease;white-space:nowrap}
-  .toast.show{transform:translateX(-50%) translateY(0)}
-
-  /* FOOTER */
-  footer{border-top:2px solid var(--dark);padding:40px;background:var(--dark)}
-  .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
-  footer .f-brand{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cream)}
-  footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,255,255,0.4);margin-top:8px;font-style:italic}
-  .footer-social{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
-  .footer-social-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
-  .footer-links{display:flex;gap:12px}
-  .footer-link{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(255,255,255,0.15);border-radius:3px;text-decoration:none;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);transition:all .2s}
-  .footer-link:hover{border-color:#9b7ec8;color:#c9b0e8}
-  .footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
-  .footer-bottom span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
-
-  @media(max-width:768px){
-    nav{padding:0 16px}.nav-links{gap:14px}.nav-links a{font-size:10px;letter-spacing:1px}
-    .landing-features{grid-template-columns:1fr}
-    .products-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-    .product-detail,.checkout-wrap{grid-template-columns:1fr}
-    .film-card-inner{grid-template-columns:1fr}.film-poster{width:100%;height:260px}
-    .member{grid-template-columns:1fr}.member-img{width:100%;height:220px}
-    .crew-member{grid-template-columns:1fr}.crew-photo{width:100%;height:180px}
-    .hero,.posts-section,.films-list,.team-grid,.post-body,.about-wrap,.crew-section,.film-synopsis,.store-hero,.store-filters,.products-grid,.product-detail,.checkout-wrap{padding-left:20px;padding-right:20px}
-    .cart-sidebar{width:100%;right:-100%}
-    .form-row,.card-row{grid-template-columns:1fr}
-    footer{padding:24px 20px}.footer-inner{flex-direction:column}.footer-social{align-items:flex-start}.footer-links{flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:8px}
-  }
-  @media(max-width:480px){.products-grid{grid-template-columns:1fr}}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#f0ece4;--dark:#1a1008;--brown:#3d2010;--accent:#7b5ea7;--mid:#6b5040;--border:#c8bfb0}
+body{background:var(--cream);color:var(--dark);font-family:'EB Garamond',serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-img{width:36px;height:36px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
+.nav-brand{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;cursor:pointer;transition:color .2s}
+.nav-links a:hover{color:var(--brown)}
+.page{display:none;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.landing-hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden}
+.landing-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,94,167,0.06) 0%,transparent 70%);pointer-events:none}
+.landing-logo{width:120px;height:120px;border-radius:16px;background:#111;margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
+.landing-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--mid);margin-bottom:20px}
+.landing-hero h1{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,100px);font-weight:900;color:var(--brown);line-height:0.95;margin-bottom:32px;text-transform:uppercase}
+.landing-sub{font-size:20px;color:var(--mid);max-width:600px;margin:0 auto 16px;font-style:italic;line-height:1.7}
+.hero-manifesto{font-size:15px;color:var(--mid);max-width:600px;margin:0 auto 48px;line-height:1.8;font-family:'Inter',sans-serif;font-weight:300}
+.landing-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;background:var(--brown);color:var(--cream);border:none;cursor:pointer;transition:all .2s;border-radius:2px}
+.btn-primary:hover{background:var(--dark)}
+.btn-secondary{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;background:transparent;color:var(--brown);border:1px solid var(--brown);cursor:pointer;transition:all .2s;border-radius:2px}
+.btn-secondary:hover{background:var(--brown);color:var(--cream)}
+.landing-scroll{margin-top:80px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--border)}
+.hero{padding:80px 40px 60px;max-width:900px;margin:0 auto;text-align:center}
+.hero-logo{width:100px;height:100px;border-radius:12px;background:#111;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
+.hero-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,8vw,82px);font-weight:900;color:var(--brown);line-height:1;margin-bottom:24px;text-transform:uppercase}
+.hero-sub{font-size:19px;color:var(--mid);max-width:580px;margin:0 auto 16px;font-style:italic;line-height:1.7}
+.hero-divider{width:60px;height:2px;background:var(--brown);margin:0 auto 60px}
+.posts-section{max-width:900px;margin:0 auto;padding:0 40px 80px}
+.section-label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);border-top:1px solid var(--border);padding-top:16px;margin-bottom:40px;display:flex;justify-content:space-between}
+.post-item{display:flex;align-items:flex-start;gap:24px;padding:28px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
+.post-item:hover .post-title{color:var(--accent)}
+.post-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--border);width:40px;flex-shrink:0;padding-top:4px}
+.post-info{flex:1}
+.post-tag{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.post-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown);margin-bottom:8px;transition:color .2s}
+.post-excerpt{font-size:15px;color:var(--mid);line-height:1.6}
+.post-meta{font-family:'Inter',sans-serif;font-size:11px;color:var(--border);margin-top:10px;letter-spacing:1px}
+.page-hero{padding:60px 40px 40px;max-width:900px;margin:0 auto}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:900;color:var(--brown);text-transform:uppercase;line-height:1;margin-bottom:16px}
+.page-hero p{font-size:18px;color:var(--mid);font-style:italic;max-width:600px;line-height:1.6}
+.films-list{max-width:900px;margin:0 auto;padding:20px 40px 80px}
+.film-card{padding:48px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.film-card:hover .film-title{color:var(--accent)}
+.film-card-inner{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start}
+.film-poster{width:280px;height:380px;background:linear-gradient(145deg,#2a1a0a,#4a2a1a);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex-shrink:0}
+.film-poster-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.film-poster-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:4px;text-transform:uppercase}
+.film-poster-sub{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.film-status{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border:1px solid var(--accent);color:var(--accent);border-radius:2px;margin-bottom:16px}
+.film-title{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--brown);line-height:1;margin-bottom:8px;text-transform:uppercase;transition:color .2s}
+.film-logline{font-size:17px;font-style:italic;color:var(--mid);line-height:1.7;margin-bottom:24px}
+.film-meta-row{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.film-meta-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--border)}
+.film-meta-value{font-family:'Inter',sans-serif;font-size:13px;color:var(--brown);font-weight:500}
+.film-desc{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:24px}
+.view-film-btn{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);cursor:pointer}
+.film-page-header{max-width:900px;margin:0 auto;padding:60px 40px 0}
+.film-synopsis{max-width:700px;margin:0 auto;padding:0 40px 60px}
+.film-synopsis h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--brown);margin-bottom:20px}
+.film-synopsis p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:24px}
+.crew-section{max-width:900px;margin:0 auto;padding:0 40px 80px}
+.crew-section-title{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);border-top:1px solid var(--border);padding-top:16px;margin-bottom:40px}
+.crew-member{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);align-items:start}
+.crew-member:last-child{border-bottom:none}
+.crew-photo{width:160px;height:200px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;overflow:hidden;flex-shrink:0}
+.crew-photo img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.crew-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);margin-bottom:4px}
+.crew-role{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.crew-bio{font-size:15px;color:var(--mid);line-height:1.8}
+.crew-projects{margin-top:12px}
+.crew-projects-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--border);margin-bottom:6px}
+.crew-project-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;border:1px solid var(--border);color:var(--mid);border-radius:2px}
+.team-grid{max-width:900px;margin:0 auto;padding:20px 40px 80px;display:flex;flex-direction:column}
+.member{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:48px 0;border-bottom:1px solid var(--border)}
+.member:last-child{border-bottom:none}
+.member-img{width:200px;height:260px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;overflow:hidden;flex-shrink:0}
+.member-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.member-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--border);margin-bottom:12px}
+.member-name{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--brown);margin-bottom:4px}
+.member-role{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.member-bio{font-size:16px;color:var(--mid);line-height:1.8}
+.post-header{max-width:700px;margin:0 auto;padding:60px 40px 40px;text-align:center}
+.post-header .post-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.post-header .post-num-large{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--border);margin-bottom:8px}
+.post-header h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--brown);line-height:1.1;text-transform:uppercase;margin-bottom:24px}
+.post-header .subtitle{font-size:19px;font-style:italic;color:var(--mid);line-height:1.6;margin-bottom:32px}
+.post-header-meta{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--border);padding-bottom:32px;border-bottom:1px solid var(--border)}
+.post-img-hero{max-width:900px;margin:0 auto 48px;padding:0 40px}
+.post-img-hero img{width:100%;height:420px;object-fit:cover;border-radius:4px;display:block}
+.post-body{max-width:700px;margin:0 auto;padding:0 40px 80px}
+.post-body p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:28px}
+.post-body h2{font-family:'Playfair Display',serif;font-size:30px;color:var(--brown);margin:48px 0 20px}
+.pull-quote{font-size:23px;font-style:italic;color:var(--brown);border-left:3px solid var(--accent);padding-left:24px;margin:40px 0;line-height:1.5}
+.img-block{margin:40px 0}
+.img-block img{width:100%;border-radius:4px;display:block}
+.img-caption{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;color:var(--border);margin-top:8px;text-align:center}
+.post-nav{display:flex;justify-content:space-between;padding:32px 0;border-top:1px solid var(--border);margin-top:40px}
+.post-nav a{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);cursor:pointer}
+.post-nav a:hover{color:var(--brown)}
+.about-wrap{max-width:700px;margin:0 auto;padding:60px 40px 80px}
+.about-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,68px);font-weight:900;color:var(--brown);text-transform:uppercase;line-height:1;margin-bottom:32px}
+.about-wrap p{font-size:18px;line-height:1.95;color:var(--dark);margin-bottom:28px}
+.big-quote{font-size:22px;font-style:italic;color:var(--brown);border-left:3px solid var(--accent);padding-left:24px;margin:40px 0;line-height:1.5}
+footer{border-top:2px solid var(--dark);padding:40px;background:var(--dark)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+footer .f-brand{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cream)}
+footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,255,255,0.4);margin-top:8px;font-style:italic}
+.footer-social{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.footer-social-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.footer-links{display:flex;gap:12px}
+.footer-link{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(255,255,255,0.15);border-radius:3px;text-decoration:none;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);transition:all .2s}
+.footer-link:hover{border-color:#9b7ec8;color:#c9b0e8}
+.footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
+.footer-bottom span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+@media(max-width:768px){
+  nav{padding:0 16px}.nav-links{gap:14px}.nav-links a{font-size:10px}
+  .hero,.posts-section,.films-list,.team-grid,.post-body,.about-wrap,.crew-section,.film-synopsis{padding-left:20px;padding-right:20px}
+  .film-card-inner{grid-template-columns:1fr}.film-poster{width:100%;height:260px}
+  .member{grid-template-columns:1fr}.member-img{width:100%;height:220px}
+  .crew-member{grid-template-columns:1fr}.crew-photo{width:100%;height:180px}
+  .post-img-hero{padding:0 20px}
+  footer{padding:24px 20px}.footer-inner{flex-direction:column}.footer-social{align-items:flex-start}.footer-links{flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:8px}
+}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo" onclick="showPage('home')">
     <div class="nav-logo-img">
@@ -290,29 +159,7 @@
   </div>
 </nav>
 
-<!-- CART SIDEBAR -->
-<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cart-sidebar">
-  <div class="cart-header">
-    <div class="cart-title">Your Cart</div>
-    <button class="cart-close" onclick="toggleCart()">×</button>
-  </div>
-  <div class="cart-items" id="cart-items-list">
-    <div class="cart-empty">Your cart is empty</div>
-  </div>
-  <div class="cart-footer" id="cart-footer" style="display:none">
-    <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal">RM 0</span></div>
-    <div class="cart-subtotal"><span>Shipping</span><span>Calculated at checkout</span></div>
-    <div class="cart-total"><span>Total</span><span id="cart-total">RM 0</span></div>
-    <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
-    <div class="checkout-note">Secure checkout · Worldwide shipping</div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
-<!-- HOME LANDING -->
+<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="landing-hero">
     <div class="landing-logo">
@@ -328,7 +175,7 @@
     <div class="landing-tag">Kuala Lumpur · Independent Film · Est. 2026</div>
     <h1>MicroCrew<br>Productions</h1>
     <p class="landing-sub">No connections. No shortcuts. Just a team that refuses to wait for permission.</p>
-    <p class="hero-manifesto" style="max-width:620px;margin:0 auto 48px">This is a live, honest journal of what it takes to build an independent film production company from zero — the constraints, the setbacks, the breakthroughs. We're documenting everything so you can follow along.</p>
+    <p class="hero-manifesto">This is a live, honest journal of what it takes to build an independent film production company from zero — the constraints, the setbacks, the breakthroughs.</p>
     <div class="landing-btns">
       <button class="btn-primary" onclick="showPage('films')">Our Films</button>
       <button class="btn-secondary" onclick="showPage('journal')">Read the Journal</button>
@@ -353,7 +200,7 @@
     <div class="hero-tag">Kuala Lumpur · Independent Film · Est. 2026</div>
     <h1>MicroCrew Productions</h1>
     <p class="hero-sub">No connections. No shortcuts. Just a team that refuses to wait for permission.</p>
-    <p class="hero-manifesto">This is a live, honest journal of what it takes to build an independent film production company from zero — the constraints, the setbacks, the breakthroughs.</p>
+    <p class="hero-manifesto">This is a live, honest journal of what it takes to build an independent film production company from zero.</p>
     <div class="hero-divider"></div>
   </div>
   <div class="posts-section">
@@ -364,7 +211,7 @@
 
 <!-- FILMS -->
 <div id="page-films" class="page">
-  <div class="page-hero"><h1>Films</h1><p>Every project we've put our name on. Click into a film to meet the crew behind it.</p></div>
+  <div class="page-hero"><h1>Films</h1><p>Every project we've put our name on.</p></div>
   <div class="films-list">
     <div class="film-card" onclick="showFilm('heritage')">
       <div class="film-card-inner">
@@ -376,14 +223,14 @@
         <div>
           <div class="film-status">● In Production · 2026</div>
           <div class="film-title">Heritage</div>
-          <p class="film-logline">A family drama about identity, memory, and the weight of what we pass on — and what we let go.</p>
+          <p class="film-logline">A family drama about identity, memory, and the weight of what we pass on.</p>
           <div class="film-meta-row">
             <div><div class="film-meta-label">Director</div><div class="film-meta-value">Fong Ky Lee</div></div>
             <div><div class="film-meta-label">Produced by</div><div class="film-meta-value">MicroCrew Productions</div></div>
             <div><div class="film-meta-label">Format</div><div class="film-meta-value">Short Film</div></div>
             <div><div class="film-meta-label">Location</div><div class="film-meta-value">Kuala Lumpur</div></div>
           </div>
-          <p class="film-desc">Heritage is MicroCrew's first production — a proof of concept for a feature film and a test of what this company is capable of.</p>
+          <p class="film-desc">Heritage is MicroCrew's first production — a proof of concept for a feature film.</p>
           <div class="view-film-btn">View Film & Crew →</div>
         </div>
       </div>
@@ -391,7 +238,7 @@
   </div>
 </div>
 
-<!-- HERITAGE DETAIL -->
+<!-- HERITAGE -->
 <div id="page-film-heritage" class="page">
   <div class="film-page-header">
     <div style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:12px;cursor:pointer" onclick="showPage('films')">← Films</div>
@@ -412,104 +259,22 @@
   </div>
   <div class="film-synopsis">
     <h2>About the Film</h2>
-    <p>Heritage is a short film about family, identity, and the things we inherit — not just objects or money, but expectations, silence, and unfinished conversations. Set against the backdrop of a Malaysia modernising faster than its people can process.</p>
-    <p>The film is MicroCrew's first production and serves as a proof of concept for a feature-length version. It was developed over six months of script revisions, location scouting across Kuala Lumpur, and an audition process that tested everything the team thought they knew.</p>
+    <p>Heritage is a short film about family, identity, and the things we inherit. Set against the backdrop of a Malaysia modernising faster than its people can process.</p>
     <p style="font-style:italic;color:var(--mid)">"A story about family, responsibility, and the weight of love." — Fong Ky Lee, Director</p>
   </div>
   <div class="crew-section">
     <div class="crew-section-title">Key Crew</div>
-    <div class="crew-member"><div class="crew-photo" style="padding:0;overflow:hidden"><img src="images/kylee.jpg" style="width:160px;height:200px;object-fit:cover;object-position:top;display:block;border-radius:4px"/></div><div><div class="crew-name">Fong Ky Lee</div><div class="crew-role">Director · Writer</div><p class="crew-bio">Fong Ky Lee is the director and writer of Heritage. She leads the film's overall creative direction — shaping its visual language, narrative structure, and emotional tone. MicroCrew brought Ky Lee on board for her instinct for authentic storytelling. She spent six months developing the script through multiple drafts, navigating the tension between creative ambition and the realities of a micro budget.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div></div>
-    <div class="crew-member"><div class="crew-photo">Photo</div><div><div class="crew-name">Pravindraj Ilanchezhian</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Pravindraj serves as Executive Producer on Heritage, overseeing the production from a strategic and operational level. As Founder and CEO of MicroCrew, he is responsible for overall planning, budget management, and ensuring the production has everything it needs to move forward.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div></div>
-    <div class="crew-member"><div class="crew-photo">Photo</div><div><div class="crew-name">Lee Kai Yan</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Kai Yan serves as Executive Producer on Heritage, contributing to the strategic and brand dimensions of the production. As Co-Founder and Chief Strategy Officer, he ensures Heritage is positioned consistently with MicroCrew's long-term identity and ambition.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div></div>
-  </div>
-</div>
-
-<!-- MERCH STORE -->
-<div id="page-merch" class="page">
-  <div class="store-hero">
-    <div>
-      <h1>MicroCrew<br>Merch</h1>
-      <p>Wear the story. Every piece is designed for those who believe in building something from nothing.</p>
+    <div class="crew-member">
+      <div class="crew-photo"><img id="img-kylee" src="" alt="Kylee"/></div>
+      <div><div class="crew-name">Fong Ky Lee</div><div class="crew-role">Director · Writer</div><p class="crew-bio">Fong Ky Lee is the director and writer of Heritage. MicroCrew brought Ky Lee on board for her instinct for authentic storytelling. She spent six months developing the script through multiple drafts.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
-    <div>
-      <div class="currency-selector">
-        <span>Currency:</span>
-        <select id="currency-select" onchange="updateCurrency(this.value)">
-          <option value="MYR">MYR — Malaysian Ringgit</option>
-          <option value="USD">USD — US Dollar</option>
-          <option value="GBP">GBP — British Pound</option>
-          <option value="EUR">EUR — Euro</option>
-          <option value="SGD">SGD — Singapore Dollar</option>
-          <option value="AUD">AUD — Australian Dollar</option>
-          <option value="JPY">JPY — Japanese Yen</option>
-          <option value="IDR">IDR — Indonesian Rupiah</option>
-        </select>
-      </div>
+    <div class="crew-member">
+      <div class="crew-photo"><img id="img-crew-pravind" src="" alt="Pravindraj"/></div>
+      <div><div class="crew-name">Pravindraj Ilanchezhian</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Pravindraj serves as Executive Producer on Heritage, overseeing the production from a strategic and operational level.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
-  </div>
-  <div class="store-filters">
-    <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
-    <button class="filter-btn" onclick="filterProducts('tshirt',this)">T-Shirts</button>
-    <button class="filter-btn" onclick="filterProducts('polo',this)">Polo Shirts</button>
-    <button class="filter-btn" onclick="filterProducts('hoodie',this)">Hoodies</button>
-    <button class="filter-btn" onclick="filterProducts('cap',this)">Caps</button>
-  </div>
-  <div class="products-grid" id="products-grid"></div>
-</div>
-
-<!-- PRODUCT DETAIL -->
-<div id="page-product" class="page">
-  <div class="product-detail" id="product-detail-content"></div>
-</div>
-
-<!-- CHECKOUT -->
-<div id="page-checkout" class="page">
-  <div class="checkout-wrap">
-    <div class="checkout-form">
-      <h2>Checkout</h2>
-      <div class="form-section">
-        <div class="form-section-title">Contact Information</div>
-        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" placeholder="email@example.com"></div>
-          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+60 12 345 6789"></div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-title">Shipping Address</div>
-        <div class="form-group"><label>Address Line 1</label><input type="text" placeholder="Street address"></div>
-        <div class="form-group"><label>Address Line 2</label><input type="text" placeholder="Apartment, suite, unit (optional)"></div>
-        <div class="form-row">
-          <div class="form-group"><label>City</label><input type="text" placeholder="City"></div>
-          <div class="form-group"><label>Postcode</label><input type="text" placeholder="Postcode"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>State / Province</label><input type="text" placeholder="State"></div>
-          <div class="form-group"><label>Country</label>
-            <select><option>Malaysia</option><option>Singapore</option><option>Indonesia</option><option>United States</option><option>United Kingdom</option><option>Australia</option><option>Japan</option><option>Other</option></select>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-title">Payment Details</div>
-        <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
-        <div class="card-row">
-          <div class="form-group"><label>Cardholder Name</label><input type="text" placeholder="Name on card"></div>
-          <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
-          <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
-        </div>
-        <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--mid);margin-top:8px;letter-spacing:1px">🔒 Payments processed securely via Stripe. Your card details are never stored.</p>
-      </div>
-    </div>
-    <div class="order-summary">
-      <h3>Order Summary</h3>
-      <div id="checkout-items"></div>
-      <hr class="order-divider">
-      <div class="order-total-row"><span>Subtotal</span><span id="checkout-subtotal">RM 0</span></div>
-      <div class="order-total-row"><span>Shipping</span><span>Calculated after checkout</span></div>
-      <div class="order-grand"><span>Total</span><span id="checkout-total">RM 0</span></div>
-      <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
-      <div class="secure-note">🔒 Secure · Encrypted · Worldwide Shipping</div>
+    <div class="crew-member">
+      <div class="crew-photo"><img id="img-crew-kaiyan" src="" alt="Kai Yan"/></div>
+      <div><div class="crew-name">Lee Kai Yan</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Kai Yan serves as Executive Producer on Heritage, ensuring it is positioned consistently with MicroCrew's long-term identity and ambition.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
   </div>
 </div>
@@ -518,8 +283,14 @@
 <div id="page-team" class="page">
   <div class="page-hero"><h1>The Team</h1><p>We didn't come from the industry. We're building our way into it.</p></div>
   <div class="team-grid">
-    <div class="member"><div class="member-img" style="background:none;padding:0;overflow:hidden"><img id="pravind-photo" style="width:200px;height:260px;object-fit:cover;object-position:top;display:block;border-radius:4px" src="" onerror="this.parentElement.innerHTML='Photo'"/></div><div><div class="member-num">#01</div><div class="member-name">Pravindraj Ilanchezhian</div><div class="member-role">Founder · Chief Executive Officer</div><p class="member-bio">Pravind started MicroCrew with a conviction that great stories don't require industry connections — they require the right people and the refusal to quit. As Founder and CEO, he drives the overall vision, strategy, and daily operations of the company. Heritage is his first major proof that the vision is real.</p></div></div>
-    <div class="member"><div class="member-img" style="padding:0;overflow:hidden"><img src="images/leekaiyan.PNG" style="width:200px;height:260px;object-fit:cover;object-position:top;display:block;border-radius:4px"/></div><div><div class="member-num">#02</div><div class="member-name">Lee Kai Yan</div><div class="member-role">Co-Founder · Chief Strategy Officer</div><p class="member-bio">Kai Yan co-founded MicroCrew and is responsible for how the company presents itself to the world. As Co-Founder and Chief Strategy Officer, he shapes the brand identity, strategic direction, and the story MicroCrew tells about itself. His work is the reason you're reading this.</p></div></div>
+    <div class="member">
+      <div class="member-img"><img id="img-pravind" src="" alt="Pravindraj"/></div>
+      <div><div class="member-num">#01</div><div class="member-name">Pravindraj Ilanchezhian</div><div class="member-role">Founder · Chief Executive Officer</div><p class="member-bio">Pravind started MicroCrew with a conviction that great stories don't require industry connections — they require the right people and the refusal to quit. As Founder and CEO, he drives the overall vision, strategy, and daily operations of the company. Heritage is his first major proof that the vision is real.</p></div>
+    </div>
+    <div class="member">
+      <div class="member-img"><img id="img-kaiyan" src="" alt="Kai Yan"/></div>
+      <div><div class="member-num">#02</div><div class="member-name">Lee Kai Yan</div><div class="member-role">Co-Founder · Chief Strategy Officer</div><p class="member-bio">Kai Yan co-founded MicroCrew and is responsible for how the company presents itself to the world. As Co-Founder and Chief Strategy Officer, he shapes the brand identity, strategic direction, and the story MicroCrew tells about itself.</p></div>
+    </div>
   </div>
 </div>
 
@@ -535,7 +306,6 @@
     <p>Our mission is to find undiscovered creative talent — directors, actors, writers, cinematographers, storytellers of every kind — and give them their first real opportunity. Not as a charity. As a genuine belief that the best stories in the world are still untold, and the people who need to tell them just haven't had their chance yet.</p>
     <div class="big-quote">"We're not just making films. We're building the careers of the people who will define what film looks like next."</div>
     <p>Heritage is the first proof of that. Fong Ky Lee is a director who had the vision and the craft but needed a production company willing to back her. MicroCrew was that company. And Heritage is what happened when we said yes.</p>
-    <p>That is the model. Find the talent. Back it fully. Build something real together. And then do it again — with the next director, the next story, the next part of the world that deserves to be seen on screen.</p>
     <p>We are starting from Kuala Lumpur. But we are building for everywhere. If you have a story that needs to be told, or you know someone who does — we want to hear it.</p>
     <p style="font-style:italic;color:var(--brown);font-size:21px;border-top:1px solid var(--border);padding-top:32px;margin-top:40px">"Never give up. Take it slow. You have time."</p>
     <p style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--border);margin-top:8px">— MicroCrew Productions</p>
@@ -567,313 +337,28 @@
 </footer>
 
 <script>
-// CURRENCY
-const rates={MYR:1,USD:0.21,GBP:0.17,EUR:0.20,SGD:0.29,AUD:0.33,JPY:32.5,IDR:3350};
-const symbols={MYR:'RM',USD:'$',GBP:'£',EUR:'€',SGD:'S$',AUD:'A$',JPY:'¥',IDR:'Rp'};
-let currentCurrency='MYR';
-const basePrices={henley:149,polo:219,hoodie:269,cap:49};
+const BASE=window.location.hostname.includes('github.io')?'/microcrew-productions':'';
+const ip=f=>`${BASE}/images/${f}`;
 
-function convertPrice(myr){
-  const v=myr*rates[currentCurrency];
-  if(currentCurrency==='JPY'||currentCurrency==='IDR') return symbols[currentCurrency]+Math.round(v).toLocaleString();
-  return symbols[currentCurrency]+v.toFixed(2);
-}
+window.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('img-pravind').src=ip('pravind.JPG');
+  document.getElementById('img-kaiyan').src=ip('leekaiyan.PNG');
+  document.getElementById('img-kylee').src=ip('kylee.jpg');
+  document.getElementById('img-crew-pravind').src=ip('pravind.JPG');
+  document.getElementById('img-crew-kaiyan').src=ip('leekaiyan.PNG');
+});
 
-function updateCurrency(c){
-  currentCurrency=c;
-  renderProducts(currentFilter);
-  updateCartDisplay();
-  updateCheckoutDisplay();
-}
+const readTime=b=>Math.max(1,Math.ceil(b.replace(/<[^>]+>/g,'').split(/\s+/).length/200));
 
-// PRODUCTS
-const products=[
-  {id:'henley-black',name:'MicroCrew Henley',type:'tshirt',category:'T-Shirts',basePrice:149,colors:[{name:'Black',hex:'#1a1a1a'},{name:'Cream',hex:'#f0ece4'},{name:'Forest',hex:'#2d4a3e'}],sizes:['S','M','L','XL','XXL'],badge:'New',desc:'A premium Henley T-shirt bearing the MicroCrew insignia. Crafted for those who move with purpose. Relaxed fit, heavyweight cotton.'},
-  {id:'polo-black',name:'MicroCrew Polo',type:'polo',category:'Polo Shirts',basePrice:219,colors:[{name:'Black',hex:'#1a1a1a'},{name:'Navy',hex:'#1a2a4a'},{name:'Cream',hex:'#f0ece4'}],sizes:['S','M','L','XL','XXL'],badge:'New',desc:'The MicroCrew Polo. Structured, refined, and built for the person who takes their craft seriously. Premium piqué cotton with embroidered logo.'},
-  {id:'hoodie-black',name:'MicroCrew Hoodie',type:'hoodie',category:'Hoodies',basePrice:269,colors:[{name:'Black',hex:'#1a1a1a'},{name:'Charcoal',hex:'#3a3a3a'},{name:'Cream',hex:'#f0ece4'}],sizes:['S','M','L','XL','XXL'],badge:'New',desc:'The MicroCrew Hoodie. Heavyweight French terry construction. Oversized fit with embroidered chest logo. The uniform of independent filmmakers.'},
-  {id:'cap-black',name:'MicroCrew Cap',type:'cap',category:'Caps',basePrice:49,colors:[{name:'Black',hex:'#1a1a1a'},{name:'Cream',hex:'#f0ece4'},{name:'Forest',hex:'#2d4a3e'}],sizes:['One Size'],badge:'New',desc:'The MicroCrew Cap. Six-panel structured fit with embroidered M logo. Adjustable strap. Worn on set and off.'},
-];
-
-let currentFilter='all';
-
-function filterProducts(f,btn){
-  currentFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProducts(f);
-}
-
-function renderProducts(f){
-  const grid=document.getElementById('products-grid');
-  const filtered=f==='all'?products:products.filter(p=>p.type===f);
-  grid.innerHTML=filtered.map(p=>`
-    <div class="product-card" onclick="showProduct('${p.id}')">
-      <div class="product-img-wrap">
-        <div class="product-placeholder">${p.name}<br><span style="font-size:9px;opacity:0.6">Image coming soon</span></div>
-        ${p.badge?`<div class="product-badge">${p.badge}</div>`:''}
-      </div>
-      <div class="product-type">${p.category}</div>
-      <div class="product-name">${p.name}</div>
-      <div class="product-price">${convertPrice(p.basePrice)}</div>
-      <div class="product-colors">${p.colors.map(c=>`<div class="color-dot" style="background:${c.hex}" title="${c.name}"></div>`).join('')}</div>
-    </div>
-  `).join('');
-}
-
-// PRODUCT DETAIL
-let selectedColor={};
-let selectedSize={};
-let selectedQty={};
-
-function showProduct(id){
-  const p=products.find(x=>x.id===id);
-  if(!p)return;
-  selectedColor[id]=p.colors[0].name;
-  selectedSize[id]=p.sizes[0];
-  selectedQty[id]=1;
-  document.getElementById('product-detail-content').innerHTML=`
-    <div class="product-detail-img"><span>${p.name}<br><small style="opacity:0.6">Image coming soon</small></span></div>
-    <div class="product-detail-info">
-      <div class="back-btn" onclick="showPage('merch')">← Back to Merch</div>
-      <div class="detail-type">${p.category}</div>
-      <div class="detail-name">${p.name}</div>
-      <div class="detail-price" id="detail-price-${id}">${convertPrice(p.basePrice)}</div>
-      <p class="detail-desc">${p.desc}</p>
-      <div class="option-label">Colour — <span id="selected-color-${id}">${p.colors[0].name}</span></div>
-      <div class="color-options" style="margin-bottom:40px">
-        ${p.colors.map(c=>`<div class="color-option${c.name===p.colors[0].name?' selected':''}" style="background:${c.hex}" onclick="selectColor('${id}','${c.name}',this)" title="${c.name}"></div>`).join('')}
-      </div>
-      <div class="option-label">Size</div>
-      <div class="size-options">
-        ${p.sizes.map((s,i)=>`<button class="size-btn${i===0?' selected':''}" onclick="selectSize('${id}','${s}',this)">${s}</button>`).join('')}
-      </div>
-      <div class="option-label">Quantity</div>
-      <div class="qty-row">
-        <button class="qty-btn" onclick="changeQty('${id}',-1)">−</button>
-        <span class="qty-num" id="qty-${id}">1</span>
-        <button class="qty-btn" onclick="changeQty('${id}',1)">+</button>
-      </div>
-      <button class="add-to-cart-btn" onclick="addToCart('${id}')">Add to Cart</button>
-      <div class="shipping-note">🌍 Worldwide Shipping · Secure Checkout</div>
-    </div>
-  `;
-  showPage('product');
-}
-
-function selectColor(id,name,el){
-  selectedColor[id]=name;
-  document.getElementById('selected-color-'+id).textContent=name;
-  el.closest('.color-options').querySelectorAll('.color-option').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-}
-function selectSize(id,size,el){
-  selectedSize[id]=size;
-  el.closest('.size-options').querySelectorAll('.size-btn').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-}
-function changeQty(id,d){
-  selectedQty[id]=Math.max(1,(selectedQty[id]||1)+d);
-  document.getElementById('qty-'+id).textContent=selectedQty[id];
-}
-
-// CART
-let cart=[];
-
-function addToCart(id){
-  const p=products.find(x=>x.id===id);
-  const color=selectedColor[id]||p.colors[0].name;
-  const size=selectedSize[id]||p.sizes[0];
-  const qty=selectedQty[id]||1;
-  const key=`${id}-${color}-${size}`;
-  const existing=cart.find(i=>i.key===key);
-  if(existing){existing.qty+=qty;}
-  else{cart.push({key,id,name:p.name,color,size,qty,price:p.basePrice});}
-  updateCartDisplay();
-  showToast(`${p.name} added to cart`);
-}
-
-function removeFromCart(key){
-  cart=cart.filter(i=>i.key!==key);
-  updateCartDisplay();
-}
-
-function updateCartDisplay(){
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const count=cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cart-count').textContent=count;
-  const list=document.getElementById('cart-items-list');
-  const footer=document.getElementById('cart-footer');
-  if(cart.length===0){
-    list.innerHTML='<div class="cart-empty">Your cart is empty</div>';
-    footer.style.display='none';
-  } else {
-    list.innerHTML=cart.map(i=>`
-      <div class="cart-item">
-        <div class="cart-item-img">${i.name}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-name">${i.name}</div>
-          <div class="cart-item-details">${i.color} · ${i.size} · Qty ${i.qty}</div>
-          <div class="cart-item-price">${convertPrice(i.price*i.qty)}</div>
-          <button class="cart-item-remove" onclick="removeFromCart('${i.key}')">Remove</button>
-        </div>
-      </div>
-    `).join('');
-    footer.style.display='block';
-    document.getElementById('cart-subtotal').textContent=convertPrice(total);
-    document.getElementById('cart-total').textContent=convertPrice(total);
-  }
-}
-
-function toggleCart(){
-  document.getElementById('cart-sidebar').classList.toggle('open');
-  document.getElementById('cart-overlay').classList.toggle('open');
-}
-
-function goToCheckout(){
-  toggleCart();
-  updateCheckoutDisplay();
-  showPage('checkout');
-}
-
-function updateCheckoutDisplay(){
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const el=document.getElementById('checkout-items');
-  if(el){
-    el.innerHTML=cart.map(i=>`<div class="order-item"><span>${i.name} × ${i.qty}<br><small>${i.color} · ${i.size}</small></span><span>${convertPrice(i.price*i.qty)}</span></div>`).join('');
-    document.getElementById('checkout-subtotal').textContent=convertPrice(total);
-    document.getElementById('checkout-total').textContent=convertPrice(total);
-  }
-}
-
-function placeOrder(){
-  if(cart.length===0){showToast('Your cart is empty');return;}
-  showToast('Order placed! We will contact you shortly.');
-  cart=[];
-  updateCartDisplay();
-  setTimeout(()=>showPage('home'),2000);
-}
-
-// TOAST
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-}
-
-// PAGES
-function showPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+n).classList.add('active');
-  window.scrollTo(0,0);
-}
-function showFilm(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-film-'+id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-// JOURNAL POSTS
-const readTime=body=>Math.max(1,Math.ceil(body.replace(/<[^>]+>/g,'').split(/\s+/).length/200));
-const shareButtons=(title)=>`
-  <div style="border-top:1px solid var(--border);padding-top:32px;margin-top:40px">
-    <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px">Share this post</div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="https://www.instagram.com/microcrewproductions/" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px;transition:all .2s">Instagram</a>
-      <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(title+' — Read the MicroCrew Journal: microcrewproductions.com')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
-      <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(title+' — '+' microcrewproductions.com')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">X / Twitter</a>
-    </div>
-  </div>`;
-const authorBio=(author,role)=>`
-  <div style="display:flex;align-items:flex-start;gap:20px;padding:32px;background:#fff;border-radius:4px;margin-top:40px;border:1px solid var(--border)">
-    <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#d4c9b8,#b8a99a);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--mid)">Photo</div>
-    <div>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--brown);margin-bottom:2px">${author}</div>
-      <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">${role||'MicroCrew Productions'}</div>
-      <div style="font-size:15px;color:var(--mid);line-height:1.7">Building MicroCrew Productions from the ground up — documenting every step of the journey, honestly.</div>
-    </div>
-  </div>`;
 const posts=[
-  {num:"#001",tag:"The Beginning",title:"We Started With Nothing. That Was The Point.",subtitle:"Why MicroCrew exists, and what we're actually trying to build.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"MicroCrew — the beginning",body:`<p>I want to be honest with you from the start. MicroCrew Productions was not born out of industry connections, film school networks, or a producer with money to spend. It was born out of stubbornness — the refusal to wait for someone to give us permission to make films.</p>
-<p>That might sound like every other indie filmmaker's origin story. But what I want to document here — what this journal is for — is the part that usually gets left out. Not the trailer. Not the festival win. The actual process of building something from zero. The confusion, the wrong decisions, the things that went sideways, and what we learned from all of it.</p>
-<div class="pull-quote">"We didn't come from the industry. We're building our way into it."</div>
-<p>Our first project is <em>Heritage</em> — a short film that serves as a proof of concept for a feature we intend to make. But Heritage is more than just a film. It's MicroCrew's first real test. Can we actually operate like a production company? Can we develop a script, assemble a team, run auditions, scout locations, and shoot something — on a micro budget, with no industry backing?</p>
-<p>The honest answer, going in, was: we didn't know. And that uncertainty is exactly why we're documenting everything.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">MicroCrew team — early days</div><div class="img-caption">The team that started MicroCrew Productions, Kuala Lumpur</div></div>
-<h2>Why Document It?</h2>
-<p>The film industry has no shortage of success stories. What it has very little of is honest accounts of what it actually looks like to build something before you have anything to show for it. The confusion. The meetings that go nowhere. The decisions made with incomplete information. The moments where you almost walk away and then don't.</p>
-<p>We're sharing all of it because we believe there are other people out there in the same position — with the drive to build something in the creative industry and no clear road in. This journal is for them as much as it's for us.</p>
-<h2>Where We're Headed</h2>
-<p>Over the coming posts, we'll walk through every stage of Heritage's production — the team, the script development, the auditions, the location scouting, the shoot itself, and the key lessons we're carrying forward. Nothing is sanitised. If something went wrong, we'll tell you it went wrong.</p>
-<p>Because the goal isn't just to make Heritage. The goal is to build a company that one day stands alongside the best independent studios in the world. We know that sounds ambitious for a team with no credits. Good. That's the point.</p>
-<p>This is Chapter One of the MicroCrew story. We hope you stick around for the rest of it.</p>`},
-  {num:"#002",tag:"The Team",title:"Three People. No Blueprint. One Direction.",subtitle:"Introducing the people behind MicroCrew Productions.",author:"MicroCrew Productions",role:"",img:"MicroCrew team portrait",body:`<p>Before we get into the making of Heritage, you should know who's making it. Because this story isn't just about a short film — it's about a team of people who decided to build a production company with no industry roadmap and figure it out as they went.</p>
-<p>There are three of us at the core. Each with a distinct role. Each learning what that role actually means in practice. This is who we are.</p>
-<h2>Pravindraj Ilanchezhian — Founder & CEO</h2>
-<p>Pravind is the reason MicroCrew exists. He carries the overall vision — where the company is going, what it stands for, and what success actually looks like. On a day-to-day level, that means planning, coordination, budgeting, and making sure the team stays aligned even when things get hard. The CEO title sounds grand. The reality is a lot of spreadsheets, difficult conversations, and decisions made with incomplete information.</p>
-<p>Heritage is his first major proof that the vision is real — that MicroCrew can move from idea to production. He's the one who keeps the machine moving when everything is working against it, and the one accountable when it doesn't.</p>
-<h2>Lee Kai Yan — Co-Founder & Chief Strategy Officer</h2>
-<p>Kai Yan co-founded MicroCrew and is responsible for how the company presents itself to the world. As Co-Founder and Chief Strategy Officer, he shapes the brand identity, strategic direction, and the story MicroCrew tells about itself.</p>
-<p>His work is the reason you're reading this journal. He understands that for a company with no portfolio yet, the story is the product. The way MicroCrew positions itself now — honest, independent, ambitious — will determine who pays attention when Heritage is released. He's making sure that story is told right.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">MicroCrew — behind the scenes</div><div class="img-caption">The team at work during Heritage pre-production</div></div>
-<h2>Fong Ky Lee — Director, Heritage</h2>
-<p>MicroCrew brought Ky Lee in to direct Heritage because of her instinct for authentic storytelling and her ability to translate ideas that feel personal into something universally resonant. She leads the film's overall creative direction — from shaping the visual language to guiding the narrative structure.</p>
-<p>She spent six months developing the Heritage script through multiple drafts, navigating the tension between creative ambition and the realities of a micro budget. Her ability to make decisive creative choices under constraint is exactly what Heritage needs. She is proof that the right creative talent doesn't always come with industry credentials.</p>
-<h2>What Drives Us</h2>
-<p>Three people. Different strengths. A shared belief that you don't need permission from the industry to start building. That's MicroCrew. And Heritage is where we prove it.</p>`},
-  {num:"#003",tag:"Producer's Desk",title:"What Producing Actually Looks Like",subtitle:"It's less about vision and more about everything vision requires.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"Production planning — MicroCrew",body:`<p>I'll be straight with you: producing Heritage was harder than I expected. Not because I didn't know what producing involved — I had read enough about it, watched enough interviews. But reading about something and actually doing it are two completely different experiences.</p>
-<p>The producer's role, from the outside, sounds like oversight. You're the one watching everything, making sure it all runs. What it actually is, day to day, is problem-solving — specifically, solving problems before they become crises, and managing them when you're already too late.</p>
-<div class="pull-quote">"With a limited budget, every decision carries more weight than it should. There's no margin for error, so everything has to be deliberate."</div>
-<h2>The Budget Reality</h2>
-<p>The challenges came in layers. The budget was tight — not "indie film tight" in the way you see celebrated at festivals. Genuinely tight, in the way that makes you question every single line item. When you're working with real constraints, the question stops being "what do we want?" and becomes "what do we actually need?" That shift in thinking is uncomfortable at first. Over time, it becomes a discipline.</p>
-<p>Coordinating a team where everyone has different levels of experience, different availability, and different expectations of how professional this was going to be — that was its own challenge entirely. Getting people aligned on what MicroCrew was trying to be, not just what Heritage needed to be, took more energy than I anticipated.</p>
-<h2>When Structure Breaks Down</h2>
-<p>One of the most uncomfortable realisations was how quickly a small team can lose its shape. Responsibilities started overlapping. Communication became inconsistent. Decisions that should have been made in a meeting were being made in separate conversations, and then having to be remade when they conflicted.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">Planning session — MicroCrew Productions</div><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div>
-<p>None of this was anyone's fault, exactly. It was the natural consequence of building a structure while simultaneously trying to operate within it. We were writing the rulebook and following it at the same time.</p>
-<h2>The Real Lesson</h2>
-<p>What I took from this is that producing — at any scale — is fundamentally about people. The budget, the schedule, the logistics — those are all solvable problems if the people are aligned. When the people aren't aligned, nothing else works as well as it should.</p>
-<p>Technology, budgets, and logistics are secondary to having the right people moving toward the same goal. That is the foundation everything else is built on. It's the lesson I'm carrying into every production after this.</p>`},
-  {num:"#004",tag:"Creative Direction",title:"Six Months, One Script, A Hundred Compromises",subtitle:"What it took to bring the Heritage script to life.",author:"Fong Ky Lee",role:"Director · Heritage",img:"Director on set — Heritage",body:`<p>The script for Heritage took six months. That probably sounds like a long time for a short film. It was. But it was also exactly as long as it needed to be, because the process wasn't just about writing — it was about learning what the film could actually be given the world we were making it in.</p>
-<p>Every director wants to make the film in their head. The version with exactly the right locations, the perfect cast, the freedom to take the time each scene deserves. Making a film on a micro budget teaches you, fairly quickly, that the film in your head is not the film you're making. And the work is in figuring out how to close that gap without losing what made the idea worth pursuing in the first place.</p>
-<div class="pull-quote">"Directing isn't just about having a vision. It's about protecting the core of that vision while letting everything else be negotiable."</div>
-<h2>The Draft Process</h2>
-<p>The Heritage script went through multiple drafts. Some ideas were cut because they were too costly to execute. Some were reworked because they were too reliant on locations we couldn't secure. Others were removed because, on reflection, they were complicating a story that needed to breathe.</p>
-<p>Each draft taught me something about what Heritage was actually about. The first draft had more — more scenes, more characters, more ambition. By the final draft, it had less. But what remained was more precise. More intentional. Every scene earned its place.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">Script development — Heritage creative process</div><div class="img-caption">Behind the scenes of the Heritage script development</div></div>
-<h2>The Collaboration</h2>
-<p>Working with MicroCrew's team on the script was its own education. The creative decisions I made as director had to be weighed against the practical realities Pravind was managing as producer. There were moments of friction — not conflict, but genuine tension between what would serve the story and what the production could support.</p>
-<p>That tension, I've come to believe, is actually healthy. It forces you to justify every choice. It makes the work more intentional. A director without constraints makes different decisions than a director who has to fight for every scene. I'm not sure the unconstrained version is always better.</p>
-<h2>What Survived</h2>
-<p>By the time we had a final script, it was leaner than the first draft. More focused. And honestly, stronger. The constraints forced decisions that made the story more precise. That's not a comfortable thing to admit — that limitation can improve creative work — but in this case, it was true. Heritage became the film it needed to be, not the film I originally imagined. And I think that's the right outcome.</p>`},
-  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"Auditions — Heritage casting",body:`<p>We went into the audition process for Heritage knowing we needed people who could act. What we didn't fully appreciate going in was how much we also needed people who were reliable, communicative, and genuinely invested in what we were making.</p>
-<p>The audition process surfaced that gap very quickly.</p>
-<div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div>
-<h2>What We Found</h2>
-<p>Some of the actors we saw were clearly capable — strong reads, good instincts, the kind of presence you want on screen. But the audition process revealed inconsistencies: people who were late, people who communicated poorly, people who didn't seem to take the session seriously. For a large production with resources to absorb disruption, these might be manageable. For MicroCrew, with a single shooting day and no margin for error, they were dealbreakers.</p>
-<p>This created challenges during the selection process, as some actors demonstrated strong potential but lacked reliability. Issues such as delays, last-minute changes, and unclear communication disrupted scheduling and required constant adjustments, making it difficult to maintain a smooth and organised audition flow.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">Audition room — Heritage casting process</div><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div>
-<h2>What Went Wrong</h2>
-<p>We spent more time than we should have reassessing candidates we'd already had doubts about — hoping that the talent would outweigh the reliability issues. Sometimes it had been an anomaly. Sometimes it hadn't. Either way, the back-and-forth cost us time and energy that we needed elsewhere in pre-production.</p>
-<p>In some cases, time and effort had to be spent reassessing candidates, which slowed overall progress. For a small independent production, these challenges had a greater impact due to limited time and resources — where even minor disruptions could affect planning and decision-making.</p>
-<h2>The Lesson</h2>
-<p>The lesson is simple in retrospect, harder to see when you're in it: casting is a form of team-building. You're not just selecting a performer — you're selecting someone who is going to show up, do the work, and contribute to an environment where everyone else can do their best work too. Talent is table stakes. Character is the differentiator.</p>
-<p>We cast Heritage. We're proud of who we ended up with. But next time, we'll be clearer about what we're looking for from the very first audition. The criteria aren't just creative. They're professional.</p>`},
-  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On",subtitle:"Location scouting when the story you're telling no longer exists.",author:"MicroCrew Productions",role:"",img:"Location scouting — Kuala Lumpur",body:`<p>The film is called Heritage. It's a story about identity, memory, and the spaces between generations. So we needed locations that carried that weight — spaces that felt lived-in, that had history in their walls, that could make the audience feel the passage of time without anyone saying a word about it.</p>
-<p>Kuala Lumpur is a city that is moving fast. And in a city moving that fast, the spaces we needed were getting harder to find.</p>
-<div class="pull-quote">"The locations that were visually right were financially out of reach. The locations that were affordable didn't feel like the film."</div>
-<h2>The Search</h2>
-<p>We visited a number of potential locations during the scouting process. Some had the right aesthetic but came with costs or access restrictions that were impossible to manage on our budget. Others were accessible but felt too modern, too clean — they didn't carry the texture the story needed. Every visit involved a version of the same compromise: what can we give up creatively to make this work logistically?</p>
-<p>In particular, it was difficult to find locations that carried a strong "heritage" feel, as many environments today are modernised and lack the traditional aesthetic required for the film. Some locations that were visually suitable were either too costly or difficult to secure, while more affordable options did not fully match the desired tone, requiring constant compromise.</p>
-<div class="img-block"><div class="img-placeholder" style="height:320px">Location scouting — Kuala Lumpur heritage district</div><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div>
-<h2>The Practical Reality</h2>
-<p>Location decisions aren't just creative — they're logistical. Space, lighting conditions, sound environment, ease of access for crew and equipment — all of these factors shape whether a location is actually filmable, not just visually appropriate. We found several spaces that looked right but created technical problems that would have slowed down the shoot significantly.</p>
-<p>In addition, logistical factors such as space, lighting, and filming conditions further complicated the decision-making process. This experience showed that location selection is not purely creative, but also strategic.</p>
-<h2>What We Learned</h2>
-<p>In the end, we found locations that worked — not perfectly, but well enough to serve the story. The process taught us that location selection for independent film is an exercise in creative compromise, and that the ability to see the potential in an imperfect space is one of the most valuable skills a filmmaker can develop.</p>
-<p>Through this experience, we realised that for independent filmmakers, the ability to adapt and make compromises is essential in balancing artistic vision with real-world constraints. Every location we visited taught us something — about what the film needed, and about what we were willing to fight for versus let go. We're still developing that skill. Heritage is the training ground.</p>`},
-  {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"images/post1-hero.jpg",body:`<p>Coming soon.</p>`},
-  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"images/post1-hero.jpg",body:`<p>Coming soon.</p>`}
+  {num:"#001",tag:"The Beginning",title:"We Started With Nothing. That Was The Point.",subtitle:"Why MicroCrew exists, and what we're actually trying to build.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>I want to be honest with you from the start. MicroCrew Productions was not born out of industry connections, film school networks, or a producer with money to spend. It was born out of stubbornness — the refusal to wait for someone to give us permission to make films.</p><p>That might sound like every other indie filmmaker's origin story. But what I want to document here is the part that usually gets left out. Not the trailer. Not the festival win. The actual process of building something from zero. The confusion, the wrong decisions, the things that went sideways, and what we learned from all of it.</p><div class="pull-quote">"We didn't come from the industry. We're building our way into it."</div><p>Our first project is <em>Heritage</em> — a short film that serves as a proof of concept for a feature we intend to make. But Heritage is more than just a film. It's MicroCrew's first real test.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post1-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The team that started MicroCrew Productions, Kuala Lumpur</div></div><h2>Why Document It?</h2><p>The film industry has no shortage of success stories. What it has very little of is honest accounts of what it actually looks like to build something before you have anything to show for it. We're sharing all of it because we believe there are other people out there in the same position.</p><h2>Where We're Headed</h2><p>Over the coming posts, we'll walk through every stage of Heritage's production. Nothing is sanitised. If something went wrong, we'll tell you it went wrong. This is Chapter One of the MicroCrew story. We hope you stick around for the rest of it.</p>`},
+  {num:"#002",tag:"The Team",title:"Three People. No Blueprint. One Direction.",subtitle:"Introducing the people behind MicroCrew Productions.",author:"MicroCrew Productions",role:"",img:"post2-hero.jpg",body:`<p>Before we get into the making of Heritage, you should know who's making it. Because this story isn't just about a short film — it's about a team of people who decided to build a production company with no industry roadmap.</p><h2>Pravindraj Ilanchezhian — Founder & CEO</h2><p>Pravind is the reason MicroCrew exists. He carries the overall vision — where the company is going, what it stands for, and what success actually looks like. Heritage is his first major proof that the vision is real.</p><h2>Lee Kai Yan — Co-Founder & Chief Strategy Officer</h2><p>Kai Yan is the strategic mind behind how MicroCrew presents itself. For a company with no finished films yet, the brand story is everything. This journal is part of that strategy.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post2-inline.JPG" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The team at work during Heritage pre-production</div></div><h2>Fong Ky Lee — Director, Heritage</h2><p>MicroCrew brought Ky Lee in to direct Heritage because of her instinct for authentic storytelling. She spent six months on the script alone, going through multiple drafts, finding a version of the story that was both creatively honest and practically executable.</p>`},
+  {num:"#003",tag:"Producer's Desk",title:"What Producing Actually Looks Like",subtitle:"It's less about vision and more about everything vision requires.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post3-hero.jpg",body:`<p>I'll be straight with you: producing Heritage was harder than I expected. Reading about something and actually doing it are two completely different experiences.</p><div class="pull-quote">"With a limited budget, every decision carries more weight than it should."</div><h2>The Budget Reality</h2><p>The challenges came in layers. The budget was genuinely tight, in the way that makes you question every single line item. Coordinating a team where everyone has different levels of experience and different expectations was its own challenge entirely.</p><h2>When Structure Breaks Down</h2><p>One of the most uncomfortable realisations was how quickly a small team can lose its shape. Responsibilities started overlapping. Communication became inconsistent.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post3-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div><h2>The Real Lesson</h2><p>Producing — at any scale — is fundamentally about people. The budget, the schedule, the logistics — those are all solvable problems if the people are aligned. When the people aren't aligned, nothing else works as well as it should.</p>`},
+  {num:"#004",tag:"Creative Direction",title:"Six Months, One Script, A Hundred Compromises",subtitle:"What it took to bring the Heritage script to life.",author:"Fong Ky Lee",role:"Director · Heritage",img:"post4-hero.jpg",body:`<p>The script for Heritage took six months. The process wasn't just about writing — it was about learning what the film could actually be given the world we were making it in.</p><div class="pull-quote">"Directing isn't just about having a vision. It's about protecting the core of that vision while letting everything else be negotiable."</div><h2>The Draft Process</h2><p>The Heritage script went through multiple drafts. Some ideas were cut because they were too costly. Some were reworked because they were too reliant on locations we couldn't secure.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post4-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">Behind the scenes of the Heritage script development</div></div><h2>What Survived</h2><p>By the time we had a final script, it was leaner than the first draft. More focused. And honestly, stronger. The constraints forced decisions that made the story more precise.</p>`},
+  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"post5-hero.jpg",body:`<p>We went into the audition process knowing we needed people who could act. What we didn't fully appreciate was how much we also needed people who were reliable and genuinely invested.</p><div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post5-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div><h2>The Lesson</h2><p>Casting is a form of team-building. You're not just selecting a performer — you're selecting someone who is going to show up, do the work, and contribute to an environment where everyone else can do their best work too. Talent is table stakes. Character is the differentiator.</p>`},
+  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On",subtitle:"Location scouting when the story you're telling no longer exists.",author:"MicroCrew Productions",role:"",img:"post6-hero.jpg",body:`<p>The film is called Heritage. We needed locations that carried weight — spaces that felt lived-in, that had history in their walls.</p><div class="pull-quote">"The locations that were visually right were financially out of reach."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post6-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div><h2>What We Learned</h2><p>In the end, we found locations that worked — not perfectly, but well enough to serve the story. Location selection for independent film is an exercise in creative compromise.</p>`},
+  {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`},
+  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`}
 ];
 
 const listEl=document.getElementById('post-list');
@@ -901,6 +386,9 @@ posts.forEach((p,i)=>{
   </div>`;
 });
 
+function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');window.scrollTo(0,0)}
+function showFilm(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-film-'+id).classList.add('active');window.scrollTo(0,0)}
+
 function showPost(n){
   const p=posts[n-1];
   const prev=n>1?`<a onclick="showPost(${n-1})">← Previous</a>`:'<span></span>';
@@ -911,22 +399,27 @@ function showPost(n){
       <div class="post-tag">${p.tag}</div>
       <h1>${p.title}</h1>
       <p class="subtitle">${p.subtitle}</p>
-      <div class="post-header-meta">By ${p.author}${p.role?' · '+p.role:''} · MicroCrew Productions · Kuala Lumpur · ${readTime(p.body)} min read</div>
+      <div class="post-header-meta">By ${p.author}${p.role?' · '+p.role:''} · MicroCrew Productions · ${readTime(p.body)} min read</div>
     </div>
-    <div class="post-img-hero">${p.img.startsWith('images/') ? `<img src="${p.img}" style="width:100%;height:420px;object-fit:cover;border-radius:4px;display:block"/>` : `<div class="img-placeholder" style="height:420px">${p.img}</div>`}</div>
+    <div class="post-img-hero"><img src="${ip(p.img)}" alt="${p.title}" style="width:100%;height:420px;object-fit:cover;border-radius:4px;display:block"/></div>
     <div class="post-body">${p.body}
-      ${shareButtons(p.title)}
-      ${authorBio(p.author,p.role)}
+      <div style="border-top:1px solid var(--border);padding-top:32px;margin-top:40px">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px">Share this post</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://www.instagram.com/microcrewproductions/" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">Instagram</a>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('MicroCrew Productions Journal')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
+        </div>
+      </div>
       <div class="post-nav">${prev}${next}</div>
       <div style="text-align:center;padding:24px 0;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase">
         <a onclick="showPage('journal')" style="color:var(--mid);cursor:pointer">← Back to Journal</a>
       </div>
     </div>`;
   showPage('post');
+  document.querySelectorAll('.post-inline-img').forEach(el=>{
+    el.src=ip(el.dataset.src);
+  });
 }
-
-// Init
-renderProducts('all');
 </script>
 </body>
 </html>
