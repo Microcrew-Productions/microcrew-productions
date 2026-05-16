@@ -9,110 +9,13 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--cream:#f0ece4;--dark:#1a1008;--brown:#3d2010;--accent:#7b5ea7;--mid:#6b5040;--border:#c8bfb0}
 body{background:var(--cream);color:var(--dark);font-family:'EB Garamond',serif;min-height:100vh}
-nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-logo{display:flex;align-items:center;gap:8px;cursor:pointer}
-.nav-logo-img{width:32px;height:32px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-brand{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--brown)}
-.nav-links{display:flex;gap:20px;align-items:center}
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-img{width:36px;height:36px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
+.nav-brand{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
+.nav-links{display:flex;gap:24px;align-items:center}
 .nav-links a{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;cursor:pointer;transition:color .2s}
 .nav-links a:hover{color:var(--brown)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:102}
-.hamburger span{width:24px;height:2px;background:var(--brown);border-radius:2px;display:block;transition:all .3s}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--cream);z-index:101;flex-direction:column;padding:0;transform:translateX(100%);transition:transform .3s ease;display:flex}
-.mobile-menu.open{transform:translateX(0)}
-.mobile-menu a{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);text-decoration:none;cursor:pointer;padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.mobile-menu a::after{content:'→';font-family:'Inter',sans-serif;font-size:16px;color:var(--accent)}
-@media(max-width:768px){
-  .nav-links{display:none!important}
-  .hamburger{display:flex!important}
-  .landing-hero{padding:60px 20px 40px;min-height:80vh}
-  .landing-hero h1{font-size:clamp(42px,12vw,72px)}
-  .landing-sub{font-size:17px}
-  .hero-manifesto{font-size:14px}
-  .landing-btns{flex-direction:column;align-items:center}
-  .btn-primary,.btn-secondary{width:100%;max-width:300px;text-align:center}
-  .hero{padding:48px 20px 40px}
-  .hero h1{font-size:clamp(36px,10vw,60px)}
-  .posts-section{padding:0 20px 60px}
-  .post-title{font-size:20px}
-  .films-list{padding:20px 20px 60px}
-  .film-card-inner{grid-template-columns:1fr}
-  .film-poster{width:100%;height:280px}
-  .film-title{font-size:32px}
-  .team-grid{padding:20px 20px 60px}
-  .member{grid-template-columns:1fr;gap:20px}
-  .member-img{width:100%;height:320px}
-  .member-img img{object-position:center top!important}
-  .member-name{font-size:28px}
-  .crew-section{padding:0 20px 60px}
-  .crew-member{grid-template-columns:1fr;gap:16px}
-  .crew-photo{width:100%;height:280px}
-  .crew-photo img{object-position:center top!important}
-  .post-body{padding:0 20px 60px}
-  .post-header{padding:40px 20px 32px}
-  .post-header h1{font-size:clamp(28px,8vw,44px)}
-  .post-img-hero{padding:0 20px}
-  .post-img-hero img{height:260px;object-position:center top}
-  .about-wrap{padding:40px 20px 60px}
-  .about-wrap h1{font-size:clamp(36px,10vw,56px)}
-  .film-page-header{padding:40px 20px 0}
-  .film-synopsis{padding:0 20px 40px}
-  .page-hero{padding:40px 20px 24px}
-  .page-hero h1{font-size:clamp(36px,10vw,56px)}
-  footer{padding:32px 20px}
-  .footer-inner{flex-direction:column;gap:24px}
-  .footer-social{align-items:flex-start}
-  .footer-links{flex-wrap:wrap;gap:8px}
-  .footer-bottom{flex-direction:column;gap:8px}
-  .pull-quote{font-size:19px;padding-left:16px}
-  .big-quote{font-size:18px;padding-left:16px}
-  div[style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
-}  .landing-hero{padding:60px 20px 40px;min-height:80vh}
-  .landing-hero h1{font-size:clamp(42px,12vw,72px)}
-  .landing-sub{font-size:17px}
-  .hero-manifesto{font-size:14px}
-  .landing-btns{flex-direction:column;align-items:center}
-  .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center}
-  .hero{padding:48px 20px 40px}
-  .hero h1{font-size:clamp(36px,10vw,60px)}
-  .posts-section{padding:0 20px 60px}
-  .post-title{font-size:20px}
-  .films-list{padding:20px 20px 60px}
-  .film-card-inner{grid-template-columns:1fr}
-  .film-poster{width:100%;height:280px}
-  .film-title{font-size:32px}
-  .team-grid{padding:20px 20px 60px}
-  .member{grid-template-columns:1fr;gap:20px}
-  .member-img{width:100%;height:280px}
-  .member-name{font-size:28px}
-  .crew-section{padding:0 20px 60px}
-  .crew-member{grid-template-columns:1fr;gap:16px}
-  .crew-photo{width:100%;height:220px}
-  .post-body{padding:0 20px 60px}
-  .post-header{padding:40px 20px 32px}
-  .post-header h1{font-size:clamp(28px,8vw,44px)}
-  .post-img-hero{padding:0 20px}
-  .post-img-hero img{height:280px}
-  .about-wrap{padding:40px 20px 60px}
-  .about-wrap h1{font-size:clamp(36px,10vw,56px)}
-  .film-page-header{padding:40px 20px 0}
-  .film-synopsis{padding:0 20px 40px}
-  .film-synopsis h2{font-size:26px}
-  .page-hero{padding:40px 20px 24px}
-  .page-hero h1{font-size:clamp(36px,10vw,56px)}
-  footer{padding:32px 20px}
-  .footer-inner{flex-direction:column;gap:24px}
-  .footer-social{align-items:flex-start}
-  .footer-links{flex-wrap:wrap;gap:8px}
-  .footer-bottom{flex-direction:column;gap:8px}
-  .pull-quote{font-size:19px;padding-left:16px}
-  .big-quote{font-size:18px;padding-left:16px}
-  .section-label{font-size:10px}
-  div[style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
-}
 .page{display:none;animation:fadeIn .4s ease}
 .page.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -173,7 +76,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .crew-member{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);align-items:start}
 .crew-member:last-child{border-bottom:none}
 .crew-photo{width:160px;height:200px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;overflow:hidden;flex-shrink:0}
-.crew-photo img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.crew-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .crew-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);margin-bottom:4px}
 .crew-role{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
 .crew-bio{font-size:15px;color:var(--mid);line-height:1.8}
@@ -184,7 +87,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .member{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:48px 0;border-bottom:1px solid var(--border)}
 .member:last-child{border-bottom:none}
 .member-img{width:200px;height:260px;background:linear-gradient(135deg,#d4c9b8,#b8a99a);border-radius:4px;overflow:hidden;flex-shrink:0}
-.member-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.member-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .member-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--border);margin-bottom:12px}
 .member-name{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--brown);margin-bottom:4px}
 .member-role{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
@@ -223,13 +126,54 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
 .footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
 .footer-bottom span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
 @media(max-width:768px){
-  nav{padding:0 16px}.nav-links{gap:14px}.nav-links a{font-size:10px}
-  .hero,.posts-section,.films-list,.team-grid,.post-body,.about-wrap,.crew-section,.film-synopsis{padding-left:20px;padding-right:20px}
-  .film-card-inner{grid-template-columns:1fr}.film-poster{width:100%;height:260px}
-  .member{grid-template-columns:1fr}.member-img{width:100%;height:220px}
-  .crew-member{grid-template-columns:1fr}.crew-photo{width:100%;height:180px}
+  nav{padding:0 20px;height:56px}
+  .nav-links{display:none}
+  .nav-brand{font-size:11px;letter-spacing:2px}
+  .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+  .hamburger span{width:24px;height:2px;background:var(--brown);border-radius:2px;display:block;transition:all .3s}
+  .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .mobile-menu{display:flex;flex-direction:column;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--cream);z-index:99;transform:translateX(100%);transition:transform .3s ease}
+  .mobile-menu.open{transform:translateX(0)}
+  .mobile-menu a{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);text-decoration:none;cursor:pointer;padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .mobile-menu a::after{content:'→';font-family:'Inter',sans-serif;font-size:16px;color:var(--accent)}
+  .landing-hero{padding:60px 20px 40px;min-height:80vh}
+  .landing-hero h1{font-size:clamp(40px,12vw,68px)}
+  .landing-sub{font-size:17px}
+  .hero-manifesto{font-size:14px}
+  .landing-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;max-width:300px;text-align:center}
+  .landing-scroll{margin-top:40px}
+  .hero{padding:48px 20px 40px}
+  .hero h1{font-size:clamp(36px,10vw,60px)}
+  .posts-section,.films-list,.team-grid,.post-body,.about-wrap,.crew-section,.film-synopsis{padding-left:20px;padding-right:20px}
+  .post-title{font-size:20px}
+  .film-card-inner{grid-template-columns:1fr}
+  .film-poster{width:100%;height:280px}
+  .film-title{font-size:32px}
+  .member{grid-template-columns:1fr;gap:20px}
+  .member-img{width:100%;height:300px}
+  .member-name{font-size:26px}
+  .crew-member{grid-template-columns:1fr;gap:16px}
+  .crew-photo{width:100%;height:260px}
+  .post-header{padding:40px 20px 32px}
+  .post-header h1{font-size:clamp(28px,8vw,44px)}
   .post-img-hero{padding:0 20px}
-  footer{padding:24px 20px}.footer-inner{flex-direction:column}.footer-social{align-items:flex-start}.footer-links{flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:8px}
+  .post-img-hero img{height:260px}
+  .about-wrap h1{font-size:clamp(36px,10vw,56px)}
+  .film-page-header{padding:40px 20px 0}
+  .page-hero{padding:40px 20px 24px}
+  .page-hero h1{font-size:clamp(36px,10vw,56px)}
+  .pull-quote{font-size:19px;padding-left:16px}
+  .big-quote{font-size:18px;padding-left:16px}
+  .section-label{flex-direction:column;gap:4px}
+  footer{padding:32px 20px}
+  .footer-inner{flex-direction:column;gap:24px}
+  .footer-social{align-items:flex-start}
+  .footer-links{flex-wrap:wrap;gap:8px}
+  .footer-bottom{flex-direction:column;gap:8px}
+  div[style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
 }
 </style>
 </head>
@@ -254,7 +198,16 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
     <a onclick="showPage('team')">The Team</a>
     <a onclick="showPage('about')">Our Story</a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="navTo('journal')">Journal</a>
+  <a onclick="navTo('films')">Films</a>
+  <a onclick="navTo('team')">The Team</a>
+  <a onclick="navTo('about')">Our Story</a>
+</div>
 
 <!-- HOME -->
 <div id="page-home" class="page active">
@@ -445,15 +398,25 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('img-crew-kaiyan').src=ip('leekaiyan.PNG');
 });
 
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function navTo(p){
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  showPage(p);
+}
+
 const readTime=b=>Math.max(1,Math.ceil(b.replace(/<[^>]+>/g,'').split(/\s+/).length/200));
 
 const posts=[
-  {num:"#001",tag:"The Beginning",title:"We Started With Nothing. That Was The Point.",subtitle:"Why MicroCrew exists, and what we're actually trying to build.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>I want to be honest with you from the start. MicroCrew Productions was not born out of industry connections, film school networks, or a producer with money to spend. It was born out of stubbornness — the refusal to wait for someone to give us permission to make films.</p><p>That might sound like every other indie filmmaker's origin story. But what I want to document here is the part that usually gets left out. Not the trailer. Not the festival win. The actual process of building something from zero. The confusion, the wrong decisions, the things that went sideways, and what we learned from all of it.</p><div class="pull-quote">"We didn't come from the industry. We're building our way into it."</div><p>Our first project is <em>Heritage</em> — a short film that serves as a proof of concept for a feature we intend to make. But Heritage is more than just a film. It's MicroCrew's first real test.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post1-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The team that started MicroCrew Productions, Kuala Lumpur</div></div><h2>Why Document It?</h2><p>The film industry has no shortage of success stories. What it has very little of is honest accounts of what it actually looks like to build something before you have anything to show for it. We're sharing all of it because we believe there are other people out there in the same position.</p><h2>Where We're Headed</h2><p>Over the coming posts, we'll walk through every stage of Heritage's production. Nothing is sanitised. If something went wrong, we'll tell you it went wrong. This is Chapter One of the MicroCrew story. We hope you stick around for the rest of it.</p>`},
-  {num:"#002",tag:"The Team",title:"Three People. No Blueprint. One Direction.",subtitle:"Introducing the people behind MicroCrew Productions.",author:"MicroCrew Productions",role:"",img:"post2-hero.jpg",body:`<p>Before we get into the making of Heritage, you should know who's making it. Because this story isn't just about a short film — it's about a team of people who decided to build a production company with no industry roadmap.</p><h2>Pravindraj Ilanchezhian — Founder & CEO</h2><p>Pravind is the reason MicroCrew exists. He carries the overall vision — where the company is going, what it stands for, and what success actually looks like. Heritage is his first major proof that the vision is real.</p><h2>Lee Kai Yan — Co-Founder & Chief Strategy Officer</h2><p>Kai Yan is the strategic mind behind how MicroCrew presents itself. For a company with no finished films yet, the brand story is everything. This journal is part of that strategy.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post2-inline.JPG" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The team at work during Heritage pre-production</div></div><h2>Fong Ky Lee — Director, Heritage</h2><p>MicroCrew brought Ky Lee in to direct Heritage because of her instinct for authentic storytelling. She spent six months on the script alone, going through multiple drafts, finding a version of the story that was both creatively honest and practically executable.</p>`},
-  {num:"#003",tag:"Producer's Desk",title:"What Producing Actually Looks Like",subtitle:"It's less about vision and more about everything vision requires.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post3-hero.jpg",body:`<p>I'll be straight with you: producing Heritage was harder than I expected. Reading about something and actually doing it are two completely different experiences.</p><div class="pull-quote">"With a limited budget, every decision carries more weight than it should."</div><h2>The Budget Reality</h2><p>The challenges came in layers. The budget was genuinely tight, in the way that makes you question every single line item. Coordinating a team where everyone has different levels of experience and different expectations was its own challenge entirely.</p><h2>When Structure Breaks Down</h2><p>One of the most uncomfortable realisations was how quickly a small team can lose its shape. Responsibilities started overlapping. Communication became inconsistent.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post3-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div><h2>The Real Lesson</h2><p>Producing — at any scale — is fundamentally about people. The budget, the schedule, the logistics — those are all solvable problems if the people are aligned. When the people aren't aligned, nothing else works as well as it should.</p>`},
-  {num:"#004",tag:"Creative Direction",title:"Six Months, One Script, A Hundred Compromises",subtitle:"What it took to bring the Heritage script to life.",author:"Fong Ky Lee",role:"Director · Heritage",img:"post4-hero.jpg",body:`<p>The script for Heritage took six months. The process wasn't just about writing — it was about learning what the film could actually be given the world we were making it in.</p><div class="pull-quote">"Directing isn't just about having a vision. It's about protecting the core of that vision while letting everything else be negotiable."</div><h2>The Draft Process</h2><p>The Heritage script went through multiple drafts. Some ideas were cut because they were too costly. Some were reworked because they were too reliant on locations we couldn't secure.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post4-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">Behind the scenes of the Heritage script development</div></div><h2>What Survived</h2><p>By the time we had a final script, it was leaner than the first draft. More focused. And honestly, stronger. The constraints forced decisions that made the story more precise.</p>`},
-  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"post5-hero.jpg",body:`<p>We went into the audition process knowing we needed people who could act. What we didn't fully appreciate was how much we also needed people who were reliable and genuinely invested.</p><div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post5-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div><h2>The Lesson</h2><p>Casting is a form of team-building. You're not just selecting a performer — you're selecting someone who is going to show up, do the work, and contribute to an environment where everyone else can do their best work too. Talent is table stakes. Character is the differentiator.</p>`},
-  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On",subtitle:"Location scouting when the story you're telling no longer exists.",author:"MicroCrew Productions",role:"",img:"post6-hero.jpg",body:`<p>The film is called Heritage. We needed locations that carried weight — spaces that felt lived-in, that had history in their walls.</p><div class="pull-quote">"The locations that were visually right were financially out of reach."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post6-inline.jpg" style="width:100%;border-radius:4px;display:block"/><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div><h2>What We Learned</h2><p>In the end, we found locations that worked — not perfectly, but well enough to serve the story. Location selection for independent film is an exercise in creative compromise.</p>`},
+  {num:"#001",tag:"The Beginning",title:"We Started With Nothing. That Was The Point.",subtitle:"Why MicroCrew exists, and what we're actually trying to build.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>I want to be honest with you from the start. MicroCrew Productions was not born out of industry connections, film school networks, or a producer with money to spend. It was born out of stubbornness — the refusal to wait for someone to give us permission to make films.</p><p>That might sound like every other indie filmmaker's origin story. But what I want to document here is the part that usually gets left out. Not the trailer. Not the festival win. The actual process of building something from zero.</p><div class="pull-quote">"We didn't come from the industry. We're building our way into it."</div><p>Our first project is <em>Heritage</em> — a short film that serves as a proof of concept for a feature we intend to make.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post1-inline.jpg"/><div class="img-caption">The team that started MicroCrew Productions, Kuala Lumpur</div></div><h2>Why Document It?</h2><p>The film industry has no shortage of success stories. What it has very little of is honest accounts of what it actually looks like to build something before you have anything to show for it.</p><h2>Where We're Headed</h2><p>Over the coming posts, we'll walk through every stage of Heritage's production. Nothing is sanitised. If something went wrong, we'll tell you it went wrong. This is Chapter One.</p>`},
+  {num:"#002",tag:"The Team",title:"Three People. No Blueprint. One Direction.",subtitle:"Introducing the people behind MicroCrew Productions.",author:"MicroCrew Productions",role:"",img:"post2-hero.jpg",body:`<p>Before we get into the making of Heritage, you should know who's making it. This story is about a team of people who decided to build a production company with no industry roadmap.</p><h2>Pravindraj Ilanchezhian — Founder & CEO</h2><p>Pravind is the reason MicroCrew exists. He carries the overall vision and makes sure the team stays aligned even when things get hard.</p><h2>Lee Kai Yan — Co-Founder & Chief Strategy Officer</h2><p>Kai Yan is the strategic mind behind how MicroCrew presents itself. For a company with no finished films yet, the brand story is everything. This journal is part of that strategy.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post2-inline.JPG"/><div class="img-caption">The team at work during Heritage pre-production</div></div><h2>Fong Ky Lee — Director, Heritage</h2><p>MicroCrew brought Ky Lee in to direct Heritage because of her instinct for authentic storytelling. She spent six months on the script alone, going through multiple drafts.</p>`},
+  {num:"#003",tag:"Producer's Desk",title:"What Producing Actually Looks Like",subtitle:"It's less about vision and more about everything vision requires.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post3-hero.jpg",body:`<p>I'll be straight with you: producing Heritage was harder than I expected. Reading about something and actually doing it are two completely different experiences.</p><div class="pull-quote">"With a limited budget, every decision carries more weight than it should."</div><h2>The Budget Reality</h2><p>The challenges came in layers. The budget was genuinely tight. Coordinating a team where everyone has different expectations was its own challenge entirely.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post3-inline.jpg"/><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div><h2>The Real Lesson</h2><p>Producing — at any scale — is fundamentally about people. When the people aren't aligned, nothing else works as well as it should.</p>`},
+  {num:"#004",tag:"Creative Direction",title:"Six Months, One Script, A Hundred Compromises",subtitle:"What it took to bring the Heritage script to life.",author:"Fong Ky Lee",role:"Director · Heritage",img:"post4-hero.jpg",body:`<p>The script for Heritage took six months. The process wasn't just about writing — it was about learning what the film could actually be.</p><div class="pull-quote">"Directing isn't just about having a vision. It's about protecting the core of that vision while letting everything else be negotiable."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post4-inline.jpg"/><div class="img-caption">Behind the scenes of the Heritage script development</div></div><h2>What Survived</h2><p>By the time we had a final script, it was leaner than the first draft. More focused. The constraints forced decisions that made the story more precise.</p>`},
+  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"post5-hero.jpg",body:`<p>We went into the audition process knowing we needed people who could act. What we didn't fully appreciate was how much we also needed people who were reliable and genuinely invested.</p><div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post5-inline.jpg"/><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div><h2>The Lesson</h2><p>Casting is a form of team-building. Talent is table stakes. Character is the differentiator.</p>`},
+  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On",subtitle:"Location scouting when the story you're telling no longer exists.",author:"MicroCrew Productions",role:"",img:"post6-hero.jpg",body:`<p>The film is called Heritage. We needed locations that carried weight — spaces that felt lived-in, that had history in their walls.</p><div class="pull-quote">"The locations that were visually right were financially out of reach."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post6-inline.jpg"/><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div><h2>What We Learned</h2><p>Location selection for independent film is an exercise in creative compromise. We're still developing that skill.</p>`},
   {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`},
   {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`}
 ];
@@ -483,19 +446,6 @@ posts.forEach((p,i)=>{
   </div>`;
 });
 
-function toggleMenu(){
-  const menu=document.getElementById('mobile-menu');
-  const btn=document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
-}
-function navTo(p){
-  const menu=document.getElementById('mobile-menu');
-  const btn=document.getElementById('hamburger');
-  menu.classList.remove('open');
-  btn.classList.remove('open');
-  showPage(p);
-}
 function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');window.scrollTo(0,0)}
 function showFilm(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-film-'+id).classList.add('active');window.scrollTo(0,0)}
 
@@ -511,13 +461,13 @@ function showPost(n){
       <p class="subtitle">${p.subtitle}</p>
       <div class="post-header-meta">By ${p.author}${p.role?' · '+p.role:''} · MicroCrew Productions · ${readTime(p.body)} min read</div>
     </div>
-    <div class="post-img-hero"><img src="${ip(p.img)}" alt="${p.title}" style="width:100%;height:420px;object-fit:cover;border-radius:4px;display:block"/></div>
+    <div class="post-img-hero"><img src="${ip(p.img)}" alt="${p.title}"/></div>
     <div class="post-body">${p.body}
       <div style="border-top:1px solid var(--border);padding-top:32px;margin-top:40px">
         <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px">Share this post</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a href="https://www.instagram.com/microcrewproductions/" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">Instagram</a>
-          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('MicroCrew Productions Journal')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('MicroCrew Productions Journal — microcrewproductions.com')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
         </div>
       </div>
       <div class="post-nav">${prev}${next}</div>
@@ -526,9 +476,7 @@ function showPost(n){
       </div>
     </div>`;
   showPage('post');
-  document.querySelectorAll('.post-inline-img').forEach(el=>{
-    el.src=ip(el.dataset.src);
-  });
+  document.querySelectorAll('.post-inline-img').forEach(el=>{el.src=ip(el.dataset.src)});
 }
 </script>
 </body>
