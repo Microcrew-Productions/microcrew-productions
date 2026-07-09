@@ -127,17 +127,6 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
 .footer-bottom span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
 @media(max-width:768px){
   nav{padding:0 20px;height:56px}
-  .nav-links{display:none}
-  .nav-brand{font-size:11px;letter-spacing:2px}
-  .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
-  .hamburger span{width:24px;height:2px;background:var(--brown);border-radius:2px;display:block;transition:all .3s}
-  .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-  .hamburger.open span:nth-child(2){opacity:0}
-  .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-  .mobile-menu{display:flex;flex-direction:column;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--cream);z-index:99;transform:translateX(100%);transition:transform .3s ease}
-  .mobile-menu.open{transform:translateX(0)}
-  .mobile-menu a{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--brown);text-decoration:none;cursor:pointer;padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-  .mobile-menu a::after{content:'→';font-family:'Inter',sans-serif;font-size:16px;color:var(--accent)}
   .landing-hero{padding:60px 20px 40px;min-height:80vh}
   .landing-hero h1{font-size:clamp(40px,12vw,68px)}
   .landing-sub{font-size:17px}
@@ -202,7 +191,7 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu" id="mobile-menu" style="display:none">
   <a onclick="navTo('journal')">Journal</a>
   <a onclick="navTo('films')">Films</a>
   <a onclick="navTo('team')">The Team</a>
@@ -399,11 +388,18 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 function toggleMenu(){
-  document.getElementById('mobile-menu').classList.toggle('open');
-  document.getElementById('hamburger').classList.toggle('open');
+  const m=document.getElementById('mobile-menu');
+  const b=document.getElementById('hamburger');
+  if(m.style.display==='flex'){
+    m.style.display='none';
+    b.classList.remove('open');
+  }else{
+    m.style.display='flex';
+    b.classList.add('open');
+  }
 }
 function navTo(p){
-  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('mobile-menu').style.display='none';
   document.getElementById('hamburger').classList.remove('open');
   showPage(p);
 }
