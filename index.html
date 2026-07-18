@@ -15,11 +15,13 @@ nav{position:sticky;top:0;z-index:1000;background:var(--cream);border-bottom:1px
 .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
 .nav-logo-img{width:34px;height:34px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
 .nav-brand{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--brown)}
-.menu-btn{display:flex;align-items:center;gap:8px;background:var(--brown);color:var(--cream);border:none;border-radius:3px;padding:12px 20px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.nav-right{position:relative;display:flex;align-items:center}
+.menu-btn{display:flex;align-items:center;gap:8px;background:var(--brown);color:var(--cream);border:none;border-radius:3px;padding:12px 20px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;line-height:1}
 .menu-btn:hover{background:var(--dark)}
 .menu-btn svg{transition:transform .3s}
 .menu-btn.open svg{transform:rotate(180deg)}
-.dropdown{position:absolute;top:64px;right:24px;width:220px;background:var(--cream);border:1px solid var(--border);border-radius:4px;box-shadow:0 12px 32px rgba(0,0,0,0.15);z-index:999;overflow:hidden}
+.dropdown{position:absolute;top:calc(100% + 10px);right:0;left:auto;width:220px;background:var(--cream);border:1px solid var(--border);border-radius:4px;box-shadow:0 12px 32px rgba(0,0,0,0.15);z-index:1200;overflow:hidden;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.dropdown.open{opacity:1;transform:translateY(0);pointer-events:auto}
 .dropdown a{display:block;padding:18px 22px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--brown);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--border)}
 .dropdown a:last-child{border-bottom:none}
 .dropdown a:hover{background:var(--brown);color:var(--cream)}
@@ -138,7 +140,7 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
   nav{padding:0 16px}
   .nav-brand{font-size:11px;letter-spacing:1.5px}
   .menu-btn{padding:10px 16px;font-size:10px}
-  .dropdown{right:16px}
+  .dropdown{right:0;width:200px}
   .landing-hero{padding:60px 20px 40px;min-height:82vh}
   .landing-hero h1{font-size:clamp(40px,12vw,68px)}
   .landing-sub{font-size:17px}
@@ -192,15 +194,17 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
     </div>
     <span class="nav-brand">MicroCrew</span>
   </div>
-  <button class="menu-btn" id="menu-btn" onclick="toggleMenu(event)">
-    Menu
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-  </button>
-  <div class="dropdown" id="dropdown" style="display:none">
-    <a onclick="navTo('journal')">Journal</a>
-    <a onclick="navTo('films')">Films</a>
-    <a onclick="navTo('team')">The Team</a>
-    <a onclick="navTo('about')">Our Story</a>
+  <div class="nav-right">
+    <button class="menu-btn" id="menu-btn" onclick="toggleMenu(event)" aria-expanded="false" aria-controls="dropdown">
+      Menu
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="dropdown" id="dropdown">
+      <a onclick="navTo('journal')">Journal</a>
+      <a onclick="navTo('films')">Films</a>
+      <a onclick="navTo('team')">The Team</a>
+      <a onclick="navTo('about')">Our Story</a>
+    </div>
   </div>
 </nav>
 
@@ -394,21 +398,32 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('img-crew-kaiyan').src=ip('leekaiyan.PNG');
 });
 
+function setMenu(open){
+  const b=document.getElementById('menu-btn');
+  const d=document.getElementById('dropdown');
+  if(!b||!d) return;
+  d.classList.toggle('open',open);
+  b.classList.toggle('open',open);
+  b.setAttribute('aria-expanded',open?'true':'false');
+}
 function toggleMenu(e){
   e.stopPropagation();
   const d=document.getElementById('dropdown');
-  d.style.display = d.style.display==='block' ? 'none' : 'block';
+  setMenu(!d.classList.contains('open'));
 }
 function navTo(p){
-  document.getElementById('dropdown').style.display='none';
+  setMenu(false);
   showPage(p);
 }
 document.addEventListener('click',function(e){
   const btn=document.getElementById('menu-btn');
   const d=document.getElementById('dropdown');
   if(btn && d && !btn.contains(e.target) && !d.contains(e.target)){
-    d.style.display='none';
+    setMenu(false);
   }
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') setMenu(false);
 });
 
 const readTime=b=>Math.max(1,Math.ceil(b.replace(/<[^>]+>/g,'').split(/\s+/).length/200));
