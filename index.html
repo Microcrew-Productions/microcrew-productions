@@ -9,21 +9,30 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--cream:#f0ece4;--dark:#1a1008;--brown:#3d2010;--accent:#7b5ea7;--mid:#6b5040;--border:#c8bfb0}
 body{background:var(--cream);color:var(--dark);font-family:'EB Garamond',serif;min-height:100vh}
-nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:var(--cream);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
 .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
-.nav-logo-img{width:36px;height:36px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
-.nav-brand{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
-.nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;cursor:pointer;transition:color .2s}
-.nav-links a:hover{color:var(--brown)}
+.nav-logo-img{width:34px;height:34px;border-radius:4px;background:#111;display:flex;align-items:center;justify-content:center}
+.nav-brand{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--brown)}
+.menu-btn{display:flex;align-items:center;gap:8px;background:var(--brown);color:var(--cream);border:none;border-radius:3px;padding:12px 20px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.menu-btn:hover{background:var(--dark)}
+.menu-btn svg{transition:transform .3s}
+.menu-btn.open svg{transform:rotate(180deg)}
+.dropdown{position:absolute;top:64px;right:24px;width:220px;background:var(--cream);border:1px solid var(--border);border-radius:4px;box-shadow:0 12px 32px rgba(0,0,0,0.15);z-index:999;overflow:hidden}
+.dropdown a{display:block;padding:18px 22px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--brown);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--border)}
+.dropdown a:last-child{border-bottom:none}
+.dropdown a:hover{background:var(--brown);color:var(--cream)}
+
 .page{display:none;animation:fadeIn .4s ease}
 .page.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.landing-hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden}
+
+.landing-hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden}
 .landing-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,94,167,0.06) 0%,transparent 70%);pointer-events:none}
 .landing-logo{width:120px;height:120px;border-radius:16px;background:#111;margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
 .landing-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--mid);margin-bottom:20px}
-.landing-hero h1{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,100px);font-weight:900;color:var(--brown);line-height:0.95;margin-bottom:32px;text-transform:uppercase}
+.landing-hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,10vw,100px);font-weight:900;color:var(--brown);line-height:0.95;margin-bottom:32px;text-transform:uppercase}
 .landing-sub{font-size:20px;color:var(--mid);max-width:600px;margin:0 auto 16px;font-style:italic;line-height:1.7}
 .hero-manifesto{font-size:15px;color:var(--mid);max-width:600px;margin:0 auto 48px;line-height:1.8;font-family:'Inter',sans-serif;font-weight:300}
 .landing-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -126,8 +135,11 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
 .footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
 .footer-bottom span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
 @media(max-width:768px){
-  nav{padding:0 20px;height:56px}
-  .landing-hero{padding:60px 20px 40px;min-height:80vh}
+  nav{padding:0 16px}
+  .nav-brand{font-size:11px;letter-spacing:1.5px}
+  .menu-btn{padding:10px 16px;font-size:10px}
+  .dropdown{right:16px}
+  .landing-hero{padding:60px 20px 40px;min-height:82vh}
   .landing-hero h1{font-size:clamp(40px,12vw,68px)}
   .landing-sub{font-size:17px}
   .hero-manifesto{font-size:14px}
@@ -135,7 +147,6 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
   .btn-primary,.btn-secondary{width:100%;max-width:300px;text-align:center}
   .landing-scroll{margin-top:40px}
   .hero{padding:48px 20px 40px}
-  .hero h1{font-size:clamp(36px,10vw,60px)}
   .posts-section,.films-list,.team-grid,.post-body,.about-wrap,.crew-section,.film-synopsis{padding-left:20px;padding-right:20px}
   .post-title{font-size:20px}
   .film-card-inner{grid-template-columns:1fr}
@@ -170,7 +181,7 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
 <nav>
   <div class="nav-logo" onclick="showPage('home')">
     <div class="nav-logo-img">
-      <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <svg width="26" height="26" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c9b0e8"/><stop offset="100%" style="stop-color:#7b5ea7"/></linearGradient></defs>
         <polygon points="10,80 10,20 28,20 50,52 72,20 90,20 90,80 76,80 76,44 54,74 46,74 24,44 24,80" fill="url(#g1)"/>
         <rect x="10" y="20" width="13" height="60" fill="url(#g1)"/>
@@ -181,22 +192,17 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
     </div>
     <span class="nav-brand">MicroCrew</span>
   </div>
-  <div class="nav-links">
-    <a onclick="showPage('journal')">Journal</a>
-    <a onclick="showPage('films')">Films</a>
-    <a onclick="showPage('team')">The Team</a>
-    <a onclick="showPage('about')">Our Story</a>
-  </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+  <button class="menu-btn" id="menu-btn" onclick="toggleMenu(event)">
+    Menu
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
   </button>
+  <div class="dropdown" id="dropdown" style="display:none">
+    <a onclick="navTo('journal')">Journal</a>
+    <a onclick="navTo('films')">Films</a>
+    <a onclick="navTo('team')">The Team</a>
+    <a onclick="navTo('about')">Our Story</a>
+  </div>
 </nav>
-<div class="mobile-menu" id="mobile-menu" style="display:none">
-  <a onclick="navTo('journal')">Journal</a>
-  <a onclick="navTo('films')">Films</a>
-  <a onclick="navTo('team')">The Team</a>
-  <a onclick="navTo('about')">Our Story</a>
-</div>
 
 <!-- HOME -->
 <div id="page-home" class="page active">
@@ -298,22 +304,23 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
   </div>
   <div class="film-synopsis">
     <h2>About the Film</h2>
-    <p>Heritage is a short film about family, identity, and the things we inherit. Set against the backdrop of a Malaysia modernising faster than its people can process.</p>
+    <p>Heritage is a quiet family drama set almost entirely inside one Malaysian-Chinese family home, over the final stretch of a dying patriarch's life and his funeral. Underneath, it's about the unequal weight of caregiving, the things that go unsaid in a family, and what actually gets inherited when a parent dies — not money, but duty, silence, and old wounds.</p>
+    <p>Based on true events and inspired by the director's own family, the film holds two real outcomes in the same frame — a permanent fracture and a reunion. It is an intimate, autobiographical story told through details that are unmistakably Malaysian-Chinese.</p>
     <p style="font-style:italic;color:var(--mid)">"A story about family, responsibility, and the weight of love." — Fong Ky Lee, Director</p>
   </div>
   <div class="crew-section">
     <div class="crew-section-title">Key Crew</div>
     <div class="crew-member">
       <div class="crew-photo"><img id="img-kylee" src="" alt="Kylee"/></div>
-      <div><div class="crew-name">Fong Ky Lee</div><div class="crew-role">Director · Writer</div><p class="crew-bio">Fong Ky Lee is the director and writer of Heritage. MicroCrew brought Ky Lee on board for her instinct for authentic storytelling. She spent six months developing the script through multiple drafts.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
+      <div><div class="crew-name">Fong Ky Lee</div><div class="crew-role">Director · Writer</div><p class="crew-bio">Fong Ky Lee is the director and writer of Heritage — a story drawn from her own family's history. MicroCrew brought Ky Lee on board for her passion and her instinct for authentic storytelling. Beyond directing, she has become a core part of the team, helping with fundraising and production.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
     <div class="crew-member">
       <div class="crew-photo"><img id="img-crew-pravind" src="" alt="Pravindraj"/></div>
-      <div><div class="crew-name">Pravindraj Ilanchezhian</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Pravindraj serves as Executive Producer on Heritage, overseeing the production from a strategic and operational level.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
+      <div><div class="crew-name">Pravindraj Ilanchezhian</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Pravindraj serves as Executive Producer on Heritage. As Founder and CEO of MicroCrew, he is responsible for overall planning, budget management, fundraising, and ensuring the production has everything it needs to move forward.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
     <div class="crew-member">
       <div class="crew-photo"><img id="img-crew-kaiyan" src="" alt="Kai Yan"/></div>
-      <div><div class="crew-name">Lee Kai Yan</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Kai Yan serves as Executive Producer on Heritage, ensuring it is positioned consistently with MicroCrew's long-term identity and ambition.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
+      <div><div class="crew-name">Lee Kai Yan</div><div class="crew-role">Executive Producer</div><p class="crew-bio">Kai Yan serves as Executive Producer on Heritage. As Co-Founder and Chief Strategy Officer, he ensures the film — and the company behind it — is positioned consistently with MicroCrew's long-term vision.</p><div class="crew-projects"><div class="crew-projects-label">MicroCrew Projects</div><span class="crew-project-tag">Heritage (2026)</span></div></div>
     </div>
   </div>
 </div>
@@ -324,11 +331,11 @@ footer .f-tagline{font-family:'EB Garamond',serif;font-size:15px;color:rgba(255,
   <div class="team-grid">
     <div class="member">
       <div class="member-img"><img id="img-pravind" src="" alt="Pravindraj"/></div>
-      <div><div class="member-num">#01</div><div class="member-name">Pravindraj Ilanchezhian</div><div class="member-role">Founder · Chief Executive Officer</div><p class="member-bio">Pravind started MicroCrew with a conviction that great stories don't require industry connections — they require the right people and the refusal to quit. As Founder and CEO, he drives the overall vision, strategy, and daily operations of the company. Heritage is his first major proof that the vision is real.</p></div>
+      <div><div class="member-num">#01</div><div class="member-name">Pravindraj Ilanchezhian</div><div class="member-role">Founder · Chief Executive Officer</div><p class="member-bio">Pravind started MicroCrew with a conviction that great stories don't require industry connections — they require the right people and the refusal to quit. As Founder and CEO, he drives the overall vision, strategy, fundraising, and daily operations of the company. Heritage is his first major proof that the vision is real.</p></div>
     </div>
     <div class="member">
       <div class="member-img"><img id="img-kaiyan" src="" alt="Kai Yan"/></div>
-      <div><div class="member-num">#02</div><div class="member-name">Lee Kai Yan</div><div class="member-role">Co-Founder · Chief Strategy Officer</div><p class="member-bio">Kai Yan co-founded MicroCrew and is responsible for how the company presents itself to the world. As Co-Founder and Chief Strategy Officer, he shapes the brand identity, strategic direction, and the story MicroCrew tells about itself.</p></div>
+      <div><div class="member-num">#02</div><div class="member-name">Lee Kai Yan</div><div class="member-role">Co-Founder · Chief Strategy Officer</div><p class="member-bio">Kai Yan co-founded MicroCrew and is responsible for how the company presents itself to the world. As Co-Founder and Chief Strategy Officer, he shapes the brand identity, strategic direction, and the story MicroCrew tells about itself. His work is the reason you're reading this.</p></div>
     </div>
   </div>
 </div>
@@ -387,34 +394,34 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('img-crew-kaiyan').src=ip('leekaiyan.PNG');
 });
 
-function toggleMenu(){
-  const m=document.getElementById('mobile-menu');
-  const b=document.getElementById('hamburger');
-  if(m.style.display==='flex'){
-    m.style.display='none';
-    b.classList.remove('open');
-  }else{
-    m.style.display='flex';
-    b.classList.add('open');
-  }
+function toggleMenu(e){
+  e.stopPropagation();
+  const d=document.getElementById('dropdown');
+  d.style.display = d.style.display==='block' ? 'none' : 'block';
 }
 function navTo(p){
-  document.getElementById('mobile-menu').style.display='none';
-  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('dropdown').style.display='none';
   showPage(p);
 }
+document.addEventListener('click',function(e){
+  const btn=document.getElementById('menu-btn');
+  const d=document.getElementById('dropdown');
+  if(btn && d && !btn.contains(e.target) && !d.contains(e.target)){
+    d.style.display='none';
+  }
+});
 
 const readTime=b=>Math.max(1,Math.ceil(b.replace(/<[^>]+>/g,'').split(/\s+/).length/200));
 
 const posts=[
-  {num:"#001",tag:"The Beginning",title:"We Started With Nothing. That Was The Point.",subtitle:"Why MicroCrew exists, and what we're actually trying to build.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>I want to be honest with you from the start. MicroCrew Productions was not born out of industry connections, film school networks, or a producer with money to spend. It was born out of stubbornness — the refusal to wait for someone to give us permission to make films.</p><p>That might sound like every other indie filmmaker's origin story. But what I want to document here is the part that usually gets left out. Not the trailer. Not the festival win. The actual process of building something from zero.</p><div class="pull-quote">"We didn't come from the industry. We're building our way into it."</div><p>Our first project is <em>Heritage</em> — a short film that serves as a proof of concept for a feature we intend to make.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post1-inline.jpg"/><div class="img-caption">The team that started MicroCrew Productions, Kuala Lumpur</div></div><h2>Why Document It?</h2><p>The film industry has no shortage of success stories. What it has very little of is honest accounts of what it actually looks like to build something before you have anything to show for it.</p><h2>Where We're Headed</h2><p>Over the coming posts, we'll walk through every stage of Heritage's production. Nothing is sanitised. If something went wrong, we'll tell you it went wrong. This is Chapter One.</p>`},
-  {num:"#002",tag:"The Team",title:"Three People. No Blueprint. One Direction.",subtitle:"Introducing the people behind MicroCrew Productions.",author:"MicroCrew Productions",role:"",img:"post2-hero.jpg",body:`<p>Before we get into the making of Heritage, you should know who's making it. This story is about a team of people who decided to build a production company with no industry roadmap.</p><h2>Pravindraj Ilanchezhian — Founder & CEO</h2><p>Pravind is the reason MicroCrew exists. He carries the overall vision and makes sure the team stays aligned even when things get hard.</p><h2>Lee Kai Yan — Co-Founder & Chief Strategy Officer</h2><p>Kai Yan is the strategic mind behind how MicroCrew presents itself. For a company with no finished films yet, the brand story is everything. This journal is part of that strategy.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post2-inline.JPG"/><div class="img-caption">The team at work during Heritage pre-production</div></div><h2>Fong Ky Lee — Director, Heritage</h2><p>MicroCrew brought Ky Lee in to direct Heritage because of her instinct for authentic storytelling. She spent six months on the script alone, going through multiple drafts.</p>`},
-  {num:"#003",tag:"Producer's Desk",title:"What Producing Actually Looks Like",subtitle:"It's less about vision and more about everything vision requires.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post3-hero.jpg",body:`<p>I'll be straight with you: producing Heritage was harder than I expected. Reading about something and actually doing it are two completely different experiences.</p><div class="pull-quote">"With a limited budget, every decision carries more weight than it should."</div><h2>The Budget Reality</h2><p>The challenges came in layers. The budget was genuinely tight. Coordinating a team where everyone has different expectations was its own challenge entirely.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post3-inline.jpg"/><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div><h2>The Real Lesson</h2><p>Producing — at any scale — is fundamentally about people. When the people aren't aligned, nothing else works as well as it should.</p>`},
-  {num:"#004",tag:"Creative Direction",title:"Six Months, One Script, A Hundred Compromises",subtitle:"What it took to bring the Heritage script to life.",author:"Fong Ky Lee",role:"Director · Heritage",img:"post4-hero.jpg",body:`<p>The script for Heritage took six months. The process wasn't just about writing — it was about learning what the film could actually be.</p><div class="pull-quote">"Directing isn't just about having a vision. It's about protecting the core of that vision while letting everything else be negotiable."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post4-inline.jpg"/><div class="img-caption">Behind the scenes of the Heritage script development</div></div><h2>What Survived</h2><p>By the time we had a final script, it was leaner than the first draft. More focused. The constraints forced decisions that made the story more precise.</p>`},
-  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"post5-hero.jpg",body:`<p>We went into the audition process knowing we needed people who could act. What we didn't fully appreciate was how much we also needed people who were reliable and genuinely invested.</p><div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post5-inline.jpg"/><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div><h2>The Lesson</h2><p>Casting is a form of team-building. Talent is table stakes. Character is the differentiator.</p>`},
-  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On",subtitle:"Location scouting when the story you're telling no longer exists.",author:"MicroCrew Productions",role:"",img:"post6-hero.jpg",body:`<p>The film is called Heritage. We needed locations that carried weight — spaces that felt lived-in, that had history in their walls.</p><div class="pull-quote">"The locations that were visually right were financially out of reach."</div><div class="img-block"><img src="" class="post-inline-img" data-src="post6-inline.jpg"/><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div><h2>What We Learned</h2><p>Location selection for independent film is an exercise in creative compromise. We're still developing that skill.</p>`},
+  {num:"#001",tag:"The Beginning",title:"We Were Chasing the Wrong Thing.",subtitle:"How a random afternoon at uni turned into MicroCrew Productions.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>I'll be honest with you, because there's no point starting this any other way.</p><p>Me and Kai Yan have known each other for about ten years — since high school. And for most of that time, we wanted the same thing: to build a business, to make it, to be successful. We tried a lot of things. Most of them failed. But if I'm being real with myself, we were chasing the wrong thing the whole time. We were chasing fast money. The lifestyle you see on TikTok and Instagram reels. We never really thought about the long game.</p><div class="pull-quote">"We were chasing the lifestyle we saw on our phones. We never thought about what we actually wanted to build."</div><p>Then one random afternoon at uni, a friend of mine told me something that stuck. He said he was obsessed with films — that he wanted to become a director. But he didn't have the funds. He didn't have a crew. He had the dream and nothing to make it real with.</p><p>And that gave me an idea. What if I built an academy? Something to help people like him — people with the passion but no way in — actually break into the film industry. I got excited. I started building the whole plan. Then reality hit me. We were nobodies. Who's going to learn filmmaking from a nobody?</p><h2>The Reality Check That Changed Everything</h2><p>Around that time we met Mr Simon David Hunter at a workshop hosted by Raffles University here in KL. We told him about our academy idea. He asked one simple question: what's your ultimate goal?</p><p>The truth was, we wanted to build a production house eventually. But we went with the academy idea because we didn't have the money for production. Simon didn't sugarcoat it. He told us straight — no one is going to join your academy, because you're a nobody, and you'll never win against the universities and established institutions. If you want to build a production house, then build a production house. Make a name for yourself first.</p><div class="pull-quote">"If you want to become a production house, then become a production house. Make a name for yourself."</div><p>That was the moment. That conversation is what started everything. We stopped chasing the shortcut and decided to build the real thing. That day, MicroCrew Productions was born.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post1-inline.jpg"/><div class="img-caption">Where it started — MicroCrew Productions, Kuala Lumpur</div></div><p>I'm still a student, by the way. I'm doing my Bachelor's in Real Estate Management and Auctions. Kai Yan's doing Business and Commerce. We're not industry veterans. We're two guys who decided to stop waiting and start building. This journal is the honest record of that. Chapter One.</p>`},
+  {num:"#002",tag:"The Team",title:"Ten Years, One Workshop, Three People.",subtitle:"The people who make MicroCrew — and how we found each other.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post2-hero.jpg",body:`<p>Every company is really just the people in it. So before we go further into Heritage, I want you to know who's actually behind MicroCrew.</p><h2>Me and Kai Yan — Ten Years In</h2><p>Kai Yan and I have known each other for about ten years, since high school. We've tried and failed at more things together than I can count. But we never stopped. When we started MicroCrew, it wasn't two strangers with a business plan — it was two friends who'd already been through a lot of dead ends together, finally building something that felt like it mattered.</p><p>Kai Yan is our Co-Founder and Chief Strategy Officer. He handles how MicroCrew presents itself to the world — the brand, the strategy, the story. For a company with no finished films yet, that story is everything. It's what gets people to care before there's a portfolio to show them.</p><div class="pull-quote">"We didn't start as founders and a plan. We started as two friends who refused to give up."</div><h2>How We Found Kylee</h2><p>Remember that Raffles University workshop with Simon David Hunter? That's not just where we got our reality check. That's where we met Kylee, along with a few other filmmakers.</p><p>I want to be careful how I say this, because I'm not criticising anyone else who was there. But personally, I felt Kylee had something the others didn't. More passion. More drive. Something about her just felt right for what we were trying to build. And it turns out I was right.</p><p>We brought her in to write and direct for us. But she's become so much more than that. She's helped us with fundraising. She's taken on things me and Kai were supposed to handle and just done them, without being asked. We've known her for less than a year, but she's become a genuine friend — and a core part of MicroCrew.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post2-inline.JPG"/><div class="img-caption">The team at work during Heritage pre-production</div></div><p>Three people. One from real estate, one from business, one filmmaker with a story to tell. None of us came from the industry. We're building our way in together.</p>`},
+  {num:"#003",tag:"Producer's Desk",title:"The Hardest Part Nobody Warns You About.",subtitle:"On funding, fear, and the lesson my father taught me.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post3-hero.jpg",body:`<p>If you want to know the single hardest thing about starting a production company as a nobody, I'll tell you straight: it's funding. Full stop.</p><p>As a producer, you usually get to be one of two ways — you already have millions, or you have some kind of backing. I have neither. This is my own venture. I'm still studying. I don't have industry connections lined up to write cheques.</p><h2>My Father's Lesson</h2><p>Now, I'm lucky. My father can support me financially. But he taught me something instead of just handing me money, and it's the most important lesson I've learned through all of this.</p><p>He told me: I can give you the funds now. But what are you going to do for the second project? The third? The fourth? Are you going to keep coming back to me and take the easy way out? Or are you going to learn, right now, how to actually go and get funding — grants, sponsorships, crowdfunding — so you become reliable and independent?</p><div class="pull-quote">"He could have just written a cheque. Instead he taught me to value money, and to stand on my own."</div><p>That lesson changed how I operate. I don't throw money around. I play it smart. And I'm genuinely thankful he chose to teach me instead of just bailing me out.</p><h2>Leaving the Comfort Zone</h2><p>But I won't lie — funding is still the hardest part. Asking people for money is not easy. Especially for me and Kai. We lived comfortably. This whole thing felt like leaving our comfort zone completely.</p><p>Our number one fear was simple: we didn't know anything. We had no portfolio. Nothing to back us up. We were fresh into an industry that doesn't hand out trust to newcomers. That fear was real.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post3-inline.jpg"/><div class="img-caption">Early coordination meetings for Heritage, Kuala Lumpur</div></div><p>But we pushed through. We started with warm connections — friends, people who knew us. And slowly it grew. Now we're in talks with businesses and other production houses. It's still hard. It's still uncomfortable. But we're doing it. One thing I'll pass on to anyone trying to do the same: always keep backup funds. Whatever happens, you want to be able to finish what you started.</p>`},
+  {num:"#004",tag:"Creative Direction",title:"Heritage Is My Family. The Wound That Never Healed.",subtitle:"Why I'm turning my own family's rupture into a film.",author:"Fong Ky Lee",role:"Director · Writer, Heritage",img:"post4-hero.jpg",body:`<p>Heritage isn't invented drama. I need to say that first. It's based on my own family — my grandfather and his three children — and a conflict around his death that, to this day, remains unresolved.</p><p>On the surface, it's a quiet family drama set almost entirely inside one Malaysian-Chinese family home, over the final stretch of a dying patriarch's life and his funeral. But underneath, it's about the unequal weight of caregiving. The things that go unsaid in a family. And what actually gets inherited when a parent dies — not money, but duty, silence, and old wounds.</p><div class="pull-quote">"Heritage is everything passed down — the warmth, the burden, and the silence all at once."</div><h2>The Family</h2><p>The father is in a nursing home with dementia, his mind slipping between the present and his own childhood. His three adult children orbit the crisis completely differently. Emma, the unmarried daughter, is the one who stays — drowning in eldercare, quietly sacrificing herself, selling her gold graduation bracelet to cover costs. Lily has emigrated to Australia, married with kids, and comes back emotionally armored. Frank, the youngest, shows up guilt-ridden, clutching a bag of fruit nobody asked for, trying to connect with a father who can't remember his name.</p><p>The whole thing builds to a dinner-table eruption over who did the work, who paid, who left. And then the father dies.</p><h2>Two Endings, Because Both Really Happened</h2><p>Here's the part that matters most to me. The film has two outcomes that mirror each other — and both of them are real. In my actual family, the eldest sibling cut everyone off permanently. And the youngest moved back into the family home with his wife and children, bringing warmth back to the house. So in the film, I deliberately hold both a permanent fracture and a reunion in the same frame.</p><p>That's the "why" behind Heritage. I'm processing a real, unhealed rupture in my own family. The two endings aren't a creative choice for drama. They're just what happened.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post4-inline.jpg"/><div class="img-caption">Behind the scenes of the Heritage creative process</div></div><h2>Why It's Unmistakably Malaysian</h2><p>The Malaysian identity runs through it structurally, not as decoration. The mother speaks Cantonese — the everyday texture of Malaysian-Chinese family life. Lily in Australia embodies the very Malaysian pattern of emigrating for a "better" life and the guilt that migration leaves behind. The whole film sits on the tension between the cultural ideal of caring for aging parents and the messy modern reality of nursing homes and split costs. And grief is expressed through joss sticks, ancestor veneration, a framed photograph. It's an intimate, autobiographical wound — told through details that are unmistakably ours.</p>`},
+  {num:"#005",tag:"Casting",title:"Casting Isn't About Talent. It's About Trust.",subtitle:"What the Heritage audition process taught us.",author:"MicroCrew Productions",role:"",img:"post5-hero.jpg",body:`<p>We went into the audition process for Heritage knowing we needed people who could act. What we didn't fully appreciate going in was how much we also needed people who were reliable and genuinely invested in what we were making.</p><div class="pull-quote">"Talent gets you in the room. Reliability is what keeps the production moving."</div><p>Some of the actors we saw were clearly capable — strong reads, good instincts, real presence. But the process revealed inconsistencies: people who were late, who communicated poorly, who didn't seem to take it seriously. For a production our size, with no margin for error, those things matter more than they would on a big set.</p><div class="img-block"><img src="" class="post-inline-img" data-src="post5-inline.jpg"/><div class="img-caption">The Heritage audition process at MicroCrew Productions</div></div><h2>The Lesson</h2><p>Casting, we realised, is a form of team-building. You're not just picking a performer. You're picking someone who's going to show up, do the work, and help create an environment where everyone else can do their best work too. Talent is table stakes. Character is the differentiator.</p>`},
+  {num:"#006",tag:"Pre-Production · KL",title:"Looking for Heritage in a City That's Moving On.",subtitle:"Location scouting when the story you're telling is disappearing.",author:"Lee Kai Yan",role:"Co-Founder & CSO",img:"post6-hero.jpg",body:`<p>The film is called Heritage. It's a story about family, memory, and the spaces between generations. So we needed locations that carried that weight — spaces that felt lived-in, that had history in their walls, that could make an audience feel the passage of time without a single line of dialogue.</p><p>Kuala Lumpur is a city that's moving fast. And in a city moving that fast, the kind of spaces we needed are getting harder and harder to find.</p><div class="pull-quote">"The locations that were visually right were out of reach. The ones we could afford didn't feel like the film."</div><p>We visited a lot of potential spaces. Some had exactly the right feel but came with costs or access restrictions we couldn't manage. Others were affordable but too modern, too clean — they didn't carry the texture Heritage needed. Every single visit came down to the same question: what can we compromise on creatively to make this actually work?</p><div class="img-block"><img src="" class="post-inline-img" data-src="post6-inline.jpg"/><div class="img-caption">The MicroCrew team during location scouting in Kuala Lumpur</div></div><h2>What I Learned</h2><p>Location scouting taught me that this work is never purely creative — it's strategic, logistical, financial, all at once. And for an independent team like ours, the real skill isn't finding the perfect space. It's learning to see the potential in an imperfect one. We're still learning it.</p>`},
   {num:"#007",tag:"Production",title:"Shooting Day. Everything On The Line.",subtitle:"Coming soon — the story isn't over yet.",author:"MicroCrew Productions",role:"",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`},
-  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`}
+  {num:"#008",tag:"Reflection",title:"What We Know Now That We Didn't Know Then.",subtitle:"Coming soon — the story isn't over yet.",author:"Pravindraj Ilanchezhian",role:"Founder & CEO",img:"post1-hero.jpg",body:`<p>Coming soon.</p>`}
 ];
 
 const listEl=document.getElementById('post-list');
@@ -463,7 +470,7 @@ function showPost(n){
         <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px">Share this post</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a href="https://www.instagram.com/microcrewproductions/" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">Instagram</a>
-          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('MicroCrew Productions Journal — microcrewproductions.com')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('MicroCrew Productions Journal')}" target="_blank" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border);color:var(--mid);text-decoration:none;border-radius:2px">WhatsApp</a>
         </div>
       </div>
       <div class="post-nav">${prev}${next}</div>
